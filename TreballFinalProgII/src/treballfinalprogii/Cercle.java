@@ -10,12 +10,11 @@ package treballfinalprogii;
  * @author mery
  */
 public class Cercle {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+   
+    private int diamtre;
+    private String color;
+    private Vector posicio;
+    private int velocitat;
+    private int acceleracio;
     
 }

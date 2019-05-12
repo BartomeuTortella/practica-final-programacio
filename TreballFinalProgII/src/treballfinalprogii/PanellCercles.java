@@ -17,25 +17,30 @@ import javax.swing.JPanel;
  *
  * @author mery
  */
-public class PanellCercles extends JPanel{
-    
-    private Ellipse2D.Float cercle = new Ellipse2D.Float(0, 0, 500, 500);
-    private Rectangle2D.Double cuadre = new Rectangle2D.Double(30, 30, 440, 440);
-    private Line2D.Float linia1 = new Line2D.Float(0, 0, 500, 500);
-    private Line2D.Float linia2 = new Line2D.Float(0, 500, 500, 0);
+public class PanellCercles extends JPanel {
+
+    private Cercle[] cercles;
+
+    public PanellCercles(int numCercles) {
+        this.cercles = crearCercles(numCercles);
+    }
+
+    private Cercle[] crearCercles(int numCercles) {
+        Cercle[] cercles = new Cercle[numCercles];
+        int temp = 20;
+        for (int i = 0; i < numCercles; i++) {
+            cercles[i] = new Cercle(temp);
+            temp += 20;
+        }
+        return cercles;
+    }
 
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setBackground(Color.YELLOW);//el fons es veu quan s'esborra una zona
-        g2d.clearRect(0, 0, 500, 500);
-        g2d.setColor(Color.RED);
-        g2d.draw(cercle);
-        g2d.setColor(Color.BLUE);
-        g2d.draw(cuadre);
-        g2d.setColor(Color.GREEN);
-        g2d.draw(linia1);
-        g2d.draw(linia2);
+        for (Cercle cercle : cercles) {
+            g2d.draw(cercle.getCercle());
+        }
     }
-    
+
 }

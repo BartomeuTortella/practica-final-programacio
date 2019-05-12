@@ -22,13 +22,13 @@ public class Panell extends JFrame implements ActionListener {
     public Panell() {
         super();                    // usamos el contructor de la clase padre JFrame
         configurarVentana();        // configuramos la ventana
-        panellCercles =  new PanellCercles();
+        panellCercles =  new PanellCercles(7);
         inicializarComponentes();   // inicializamos los atributos o componentes
     }
 
     private void configurarVentana() {
         this.setTitle("Esta Es Una Ventana");                   // colocamos titulo a la ventana
-        this.setSize(500, 500);                                 // colocamos tamanio a la ventana (ancho, alto)
+        this.setSize(700, 700);                                 // colocamos tamanio a la ventana (ancho, alto)
         this.setLocationRelativeTo(null);                       // centramos la ventana en la pantalla
         this.setLayout(null);                                   // no usamos ningun layout, solo asi podremos dar posiciones a los componentes
         this.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
@@ -52,7 +52,7 @@ public class Panell extends JFrame implements ActionListener {
 //        this.add(caja);
 //        this.add(boton);
         this.getContentPane().add(panellCercles);
-        panellCercles.setBounds(0, 0, 500, 500);
+        panellCercles.setBounds(0, 0, 700, 700);
     }
 
     @Override

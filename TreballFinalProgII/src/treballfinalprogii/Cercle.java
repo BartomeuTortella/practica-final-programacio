@@ -26,14 +26,13 @@ public class Cercle {
         this.posicio = posicio;
         this.velocitat = velocitat;
         this.acceleracio = acceleracio;
-        this.cercle = new Ellipse2D.Float(posició, posició, 500, 500);
+        this.cercle = new Ellipse2D.Float(posició, posició, 40, 40);
 
     }
 
     public Ellipse2D.Float getCercle() {
         return cercle;
     }
-    
 
     public int getDiamtre() {
         return diamtre;

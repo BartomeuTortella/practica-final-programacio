@@ -8,9 +8,6 @@ package treballfinalprogii;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 
 /**
@@ -38,6 +35,8 @@ public class PanellCercles extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setBackground(Color.YELLOW);//el fons es veu quan s'esborra una zona
+        g2d.clearRect(0, 0, 500, 700);
         for (Cercle cercle : cercles) {
             g2d.draw(cercle.getCercle());
         }

@@ -11,11 +11,8 @@ package treballfinalprogii;
  */
 public class TreballFinalProgII {
 
-    /**
-     * @param args the command line arguments
-     */
-    //public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) {
+        Panell finestra = new Panell();      // creamos una ventana
+        finestra.setVisible(true);
     }
-    
-
+}

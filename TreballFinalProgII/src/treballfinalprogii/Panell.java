@@ -43,10 +43,6 @@ public class Panell extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(this, "Hola " + nombre + ".");    // mostramos un mensaje (frame, mensaje)
     }
 
-    public static void main(String[] args) {
-        Panell finestra = new Panell();      // creamos una ventana
-        finestra.setVisible(true);
-
-    }
+  
 
 }

@@ -1,5 +1,6 @@
 package treballfinalprogii;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -19,7 +20,7 @@ public class Panell extends JFrame implements ActionListener {
     public Panell() {
         super();                    // usamos el contructor de la clase padre JFrame
         configurarVentana();        // configuramos la ventana
-        panellCercles = new PanellCercles(7);
+        panellCercles = new PanellCercles();
         inicializarComponentes();   // inicializamos los atributos o componentes
     }
 
@@ -30,6 +31,8 @@ public class Panell extends JFrame implements ActionListener {
         this.setLayout(null);                                   // no usamos ningun layout, solo asi podremos dar posiciones a los componentes
         this.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
+        this.getContentPane().setBackground(Color.pink);
+
     }
 
     private void inicializarComponentes() {
@@ -42,7 +45,5 @@ public class Panell extends JFrame implements ActionListener {
         String nombre = caja.getText();                                 // obtenemos el contenido de la caja de texto
         JOptionPane.showMessageDialog(this, "Hola " + nombre + ".");    // mostramos un mensaje (frame, mensaje)
     }
-
-  
 
 }

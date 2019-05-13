@@ -18,8 +18,7 @@ public class PanellCercles extends JPanel {
 
     private Cercle[] cercles;
 
-    public PanellCercles(int numCercles) {
-        this.cercles = crearCercles(numCercles);
+    public PanellCercles() {
     }
 
     private Cercle[] crearCercles(int numCercles) {
@@ -35,10 +34,17 @@ public class PanellCercles extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setBackground(Color.YELLOW);//el fons es veu quan s'esborra una zona
-        g2d.clearRect(0, 0, 500, 700);
+
+        this.cercles = crearCercles(1);
+
         for (Cercle cercle : cercles) {
-            g2d.draw(cercle.getCercle());
+            // Draw the box
+            g.setColor(java.awt.Color.LIGHT_GRAY);
+            g.fillRect(0, 0, 500, 700);
+
+            // Draw the ball
+            g.setColor(java.awt.Color.BLUE);
+            g.fillOval(40, 40, 40, 40);
         }
     }
 

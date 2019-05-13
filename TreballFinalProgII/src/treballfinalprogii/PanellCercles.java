@@ -25,7 +25,7 @@ public class PanellCercles extends JPanel {
         Cercle[] cercles = new Cercle[numCercles];
         int temp = 20;
         for (int i = 0; i < numCercles; i++) {
-            cercles[i] = new Cercle(temp);
+            cercles[i] = new Cercle();
             temp += 20;
         }
         return cercles;
@@ -44,7 +44,7 @@ public class PanellCercles extends JPanel {
 
             // Draw the ball
             g.setColor(java.awt.Color.BLUE);
-            g.fillOval(40, 40, 40, 40);
+            g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
         }
     }
 

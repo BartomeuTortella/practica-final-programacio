@@ -5,7 +5,6 @@
  */
 package treballfinalprogii;
 
-import java.awt.Graphics;
 import java.awt.geom.Ellipse2D;
 import javafx.scene.paint.Color;
 
@@ -18,16 +17,16 @@ public class Cercle {
     private int diamtre;
     private Color color;
     private Vector posicio;
-    private int velocitat;
+    private Vector velocitat;
     private int acceleracio;
     private Ellipse2D.Float cercle;
 
-    public Cercle(int posició) {
-        this.diamtre = diamtre;
+    public Cercle() {
+        this.diamtre = 40;
         this.color = Color.BLUE;
-        this.posicio = posicio;
-        this.velocitat = velocitat;
-        this.acceleracio = acceleracio;
+        this.posicio = new Vector(0, 0);
+        this.velocitat = new Vector(1, 1);
+        this.acceleracio = 0;
 
     }
 
@@ -59,11 +58,11 @@ public class Cercle {
         this.posicio = posicio;
     }
 
-    public int getVelocitat() {
+    public Vector getVelocitat() {
         return velocitat;
     }
 
-    public void setVelocitat(int velocitat) {
+    public void setVelocitat(Vector velocitat) {
         this.velocitat = velocitat;
     }
 

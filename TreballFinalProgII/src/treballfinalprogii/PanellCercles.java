@@ -44,7 +44,8 @@ public class PanellCercles extends JPanel {
 
             // Draw the ball
             g.setColor(java.awt.Color.BLUE);
-            g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
+            //g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
+            g.fillOval(cercle.getPosicio().x, cercle.getPosicio().y, cercle.getDiamtre(), cercle.getDiamtre());
         }
     }
 

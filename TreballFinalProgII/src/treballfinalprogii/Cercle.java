@@ -27,7 +27,12 @@ public class Cercle {
         this.posicio = new Vector(0, 0);
         this.velocitat = new Vector(1, 1);
         this.acceleracio = 0;
+        moureCercle();
+    }
 
+    public void moureCercle() {
+        //System.out.println(this.posicio.getModul());
+        this.posicio.suma(this.velocitat);
     }
 
     public Ellipse2D.Float getCercle() {

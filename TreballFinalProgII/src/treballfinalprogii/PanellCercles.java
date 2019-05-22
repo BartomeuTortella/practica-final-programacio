@@ -7,9 +7,6 @@ package treballfinalprogii;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -41,6 +38,7 @@ public class PanellCercles extends JPanel {
                     try {
                         Thread.sleep(1000 / 30);  // milliseconds
                     } catch (InterruptedException ex) {
+                        System.out.println(ex);
                     }
                 }
             }

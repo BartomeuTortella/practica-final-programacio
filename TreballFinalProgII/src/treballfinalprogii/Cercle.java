@@ -24,8 +24,8 @@ public class Cercle {
     public Cercle() {
         this.diamtre = 40;
         this.color = Color.BLUE;
-        this.posicio = new Vector(0, 0);
-        this.velocitat = new Vector(1, 1);
+        this.posicio = new Vector(50, 60);
+        this.velocitat = new Vector(2, 2);
         this.acceleracio = 0;
         moureCercle();
     }
@@ -33,6 +33,21 @@ public class Cercle {
     public void moureCercle() {
         //System.out.println(this.posicio.getModul());
         this.posicio.suma(this.velocitat);
+        calcularDireccio(this.posicio);
+    }
+
+    private void calcularDireccio(Vector posicio) {
+        if (posicio.getX() == 0) {
+            this.velocitat.setX(2);
+        } else if (posicio.getX() == 460) {
+            this.velocitat.setX(-2);
+        }
+
+        if (posicio.getY() == 0) {
+            this.velocitat.setY(2);
+        } else if (posicio.getY() == 634) {
+            this.velocitat.setY(-2);
+        }
     }
 
     public Ellipse2D.Float getCercle() {

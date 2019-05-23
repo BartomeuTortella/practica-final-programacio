@@ -7,6 +7,7 @@ package treballfinalprogii;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JPanel;
 
 /**
@@ -18,16 +19,24 @@ public class PanellCercles extends JPanel {
     private Cercle[] cercles;
 
     public PanellCercles() {
-        this.cercles = crearCercles(1);
+        this.cercles = crearCercles(2);
         comencarJoc();
     }
 
     private Cercle[] crearCercles(int numCercles) {
         Cercle[] cercles = new Cercle[numCercles];
         for (int i = 0; i < numCercles; i++) {
-            cercles[i] = new Cercle();
+            cercles[i] = new Cercle(generarPosicioAleatoria());
         }
         return cercles;
+    }
+
+    private Vector generarPosicioAleatoria() {
+
+        int randomNumX = ThreadLocalRandom.current().nextInt(0, 460 + 1);
+        int randomNumY = ThreadLocalRandom.current().nextInt(0, 634 + 1);
+        Vector vector = new Vector(randomNumX, randomNumY);
+        return vector;
     }
 
     private void comencarJoc() {
@@ -50,13 +59,12 @@ public class PanellCercles extends JPanel {
 
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        // Draw the box
+        g.setColor(java.awt.Color.LIGHT_GRAY);
+        g.fillRect(0, 0, 500, 700);
+        // Draw the ball
+        g.setColor(java.awt.Color.BLUE);
         for (int i = 0; i < cercles.length; i++) {
-            // Draw the box
-            g.setColor(java.awt.Color.LIGHT_GRAY);
-            g.fillRect(0, 0, 500, 700);
-
-            // Draw the ball
-            g.setColor(java.awt.Color.BLUE);
             //g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
             cercles[i].moureCercle();
             g.fillOval(

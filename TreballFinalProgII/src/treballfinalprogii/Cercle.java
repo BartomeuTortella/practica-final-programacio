@@ -21,31 +21,31 @@ public class Cercle {
     private int acceleracio;
     private Ellipse2D.Float cercle;
 
-    public Cercle() {
+    public Cercle(Vector posicio) {
         this.diamtre = 40;
         this.color = Color.BLUE;
-        this.posicio = new Vector(50, 60);
-        this.velocitat = new Vector(2, 2);
+        this.posicio = posicio;
+        System.out.println(posicio);
+        this.velocitat = new Vector(3, 3);
         this.acceleracio = 0;
         moureCercle();
     }
 
     public void moureCercle() {
-        //System.out.println(this.posicio.getModul());
         this.posicio.suma(this.velocitat);
         calcularDireccio(this.posicio);
     }
 
     private void calcularDireccio(Vector posicio) {
-        if (posicio.getX() == 0) {
+        if (posicio.getX() == -1 || posicio.getX() == 0 || posicio.getX() == 1) {
             this.velocitat.setX(2);
-        } else if (posicio.getX() == 460) {
+        } else if (posicio.getX() == 459 || posicio.getX() == 460 || posicio.getX() == 461) {
             this.velocitat.setX(-2);
         }
 
-        if (posicio.getY() == 0) {
+        if (posicio.getY() == -1 || posicio.getY() == 0 || posicio.getY() == 1) {
             this.velocitat.setY(2);
-        } else if (posicio.getY() == 634) {
+        } else if (posicio.getY() == 633 || posicio.getY() == 634 || posicio.getY() == 635) {
             this.velocitat.setY(-2);
         }
     }

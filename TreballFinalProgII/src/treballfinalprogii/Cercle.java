@@ -25,7 +25,6 @@ public class Cercle {
         this.diamtre = 40;
         this.color = Color.BLUE;
         this.posicio = posicio;
-        System.out.println(posicio);
         this.velocitat = new Vector(3, 3);
         this.acceleracio = 0;
         moureCercle();
@@ -37,6 +36,10 @@ public class Cercle {
     }
 
     private void calcularDireccio(Vector posicio) {
+        calcularDireccioRebot(posicio);
+    }
+
+    private void calcularDireccioRebot(Vector posicio) {
         if (posicio.getX() == -1 || posicio.getX() == 0 || posicio.getX() == 1) {
             this.velocitat.setX(2);
         } else if (posicio.getX() == 459 || posicio.getX() == 460 || posicio.getX() == 461) {
@@ -48,6 +51,21 @@ public class Cercle {
         } else if (posicio.getY() == 633 || posicio.getY() == 634 || posicio.getY() == 635) {
             this.velocitat.setY(-2);
         }
+    }
+
+    private void calcularDireccioContinu(Vector posicio) {
+        if (posicio.getX() == -7 || posicio.getX() == -6 || posicio.getX() == -5) {
+            this.posicio.setX(458);
+        } else if (posicio.getX() == 499 || posicio.getX() == 500 || posicio.getX() == 501) {
+            this.posicio.setX(0);
+        }
+
+        if (posicio.getY() == -1 || posicio.getY() == 0 || posicio.getY() == 1) {
+            this.posicio.setY(632);
+        } else if (posicio.getY() == 689 || posicio.getY() == 690 || posicio.getY() == 691) {
+            this.posicio.setY(0);
+        }
+
     }
 
     public Ellipse2D.Float getCercle() {

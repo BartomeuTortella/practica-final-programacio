@@ -5,6 +5,7 @@
  */
 package treballfinalprogii;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.concurrent.ThreadLocalRandom;
@@ -19,7 +20,7 @@ public class PanellCercles extends JPanel {
     private Cercle[] cercles;
 
     public PanellCercles() {
-        this.cercles = crearCercles(2);
+        this.cercles = crearCercles(20);
         comencarJoc();
     }
 
@@ -63,15 +64,24 @@ public class PanellCercles extends JPanel {
         g.setColor(java.awt.Color.LIGHT_GRAY);
         g.fillRect(0, 0, 500, 700);
         // Draw the ball
-        g.setColor(java.awt.Color.BLUE);
         for (int i = 0; i < cercles.length; i++) {
             //g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
             cercles[i].moureCercle();
+            g.setColor(Color.YELLOW); //definim color de la bolla
+            //pintam la bolla
             g.fillOval(
                     ((Double) cercles[i].getPosicio().getX()).intValue(),
                     ((Double) cercles[i].getPosicio().getY()).intValue(),
                     cercles[i].getDiamtre(),
                     cercles[i].getDiamtre());
+            g.setColor(Color.BLACK); //definim el color del costat
+            //pintam el costat
+            g.drawOval(
+                    ((Double) cercles[i].getPosicio().getX()).intValue(),
+                    ((Double) cercles[i].getPosicio().getY()).intValue(),
+                    cercles[i].getDiamtre(),
+                    cercles[i].getDiamtre());
+
         }
 
     }

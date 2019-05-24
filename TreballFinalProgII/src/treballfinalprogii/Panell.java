@@ -24,7 +24,7 @@ public class Panell extends JFrame implements ActionListener {
     }
 
     private void configurarVentana() {
-        this.setTitle("Esta Es Una Ventana");                   // colocamos titulo a la ventana
+        this.setTitle("Bolles");                                // colocamos titulo a la ventana
         this.setSize(700, 700);                                 // colocamos tamanio a la ventana (ancho, alto)
         this.setLocationRelativeTo(null);                       // centramos la ventana en la pantalla
         this.setLayout(null);                                   // no usamos ningun layout, solo asi podremos dar posiciones a los componentes

@@ -21,7 +21,7 @@ public class PanellCercles extends JPanel {
 
     public PanellCercles() {
         this.cercles = crearCercles(20);
-        comencarJoc();
+        comencarJoc(); //aixo millor si ho crida la classe Panell
     }
 
     private Cercle[] crearCercles(int numCercles) {
@@ -32,7 +32,7 @@ public class PanellCercles extends JPanel {
         return cercles;
     }
 
-    private Vector generarPosicioAleatoria() {
+    private Vector generarPosicioAleatoria() { //aixo ha d'estar a la classe vector .
 
         int randomNumX = ThreadLocalRandom.current().nextInt(0, 460 + 1);
         int randomNumY = ThreadLocalRandom.current().nextInt(0, 634 + 1);
@@ -41,8 +41,9 @@ public class PanellCercles extends JPanel {
     }
 
     private void comencarJoc() {
-        Thread gameThread = new Thread() {
-            public void run() {
+        Thread gameThread = new Thread() { //aixo millor llevar-ho, per emprar nomes el fil de propi progrmaa primcila
+            //al main de la classe main he de cridar akest metode perque tot se posi enmarxa (amb el while true)
+            public void run() { //fora
                 while (true) {
                     repaint();
                     try {
@@ -53,7 +54,7 @@ public class PanellCercles extends JPanel {
                 }
             }
         };
-        gameThread.start();  // Callback run()
+        gameThread.start();  // Callback run() //tb sen ha danar
     }
 
     @Override
@@ -67,6 +68,7 @@ public class PanellCercles extends JPanel {
         for (int i = 0; i < cercles.length; i++) {
             //g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
             cercles[i].moureCercle();
+            //millor si tot lo de pintar els cercles ho feim al a classe cercle i aixi queda aqui més net
             g.setColor(Color.YELLOW); //definim color de la bolla
             //pintam la bolla
             g.fillOval(

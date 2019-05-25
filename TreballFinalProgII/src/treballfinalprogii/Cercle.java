@@ -27,6 +27,14 @@ public class Cercle {
         this.posicio = posicio;
         this.velocitat = new Vector(3, 3);
         this.acceleracio = 0;
+        //sera cte (0,1) cap avall
+        //a cada pas de temps a la velocitat li sum lacceleracio, a cada pas de temps calculare la posicio segons la v q dugui + acceleracio
+        //velocitat ha de tenir un limit de velocitat i quan hi arribi, es manendra = velocitat es velocitat + acceleracio i si arribaa a limit satura
+        //he de programar dsps si hi ha intereaccio amb ratoli
+        //en es metode de calcular la nova pos del cercle hi ha cond de si he de seguir o no el ratoli
+        //si no, ja se com ferho: cte que ha de caure
+        //si hi ha ratoli: tenc el cercle a una pos i el ratoli que esta a una altra respecte de (0,=), he de restar akests dos vectors i tenc vector dacceleracio
+        //quan tenc akest super vector, lhe de normalitzar, i ara l'he de multiplicar per un factor i aixi aqueda visuatlment bé
         moureCercle();
     }
 

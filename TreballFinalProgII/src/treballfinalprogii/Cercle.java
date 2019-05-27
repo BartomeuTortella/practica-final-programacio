@@ -5,8 +5,9 @@
  */
 package treballfinalprogii;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.geom.Ellipse2D;
-import javafx.scene.paint.Color;
 
 /**
  *
@@ -18,7 +19,7 @@ public class Cercle {
     private Color color;
     private Vector posicio;
     private Vector velocitat;
-    private int acceleracio;
+    private Vector acceleracio;
     private Ellipse2D.Float cercle;
 
     public Cercle(Vector posicio) {
@@ -26,7 +27,7 @@ public class Cercle {
         this.color = Color.BLUE;
         this.posicio = posicio;
         this.velocitat = new Vector(3, 3);
-        this.acceleracio = 0;
+        this.acceleracio = new Vector(0, 1);
         //sera cte (0,1) cap avall
         //a cada pas de temps a la velocitat li sum lacceleracio, a cada pas de temps calculare la posicio segons la v q dugui + acceleracio
         //velocitat ha de tenir un limit de velocitat i quan hi arribi, es manendra = velocitat es velocitat + acceleracio i si arribaa a limit satura
@@ -35,7 +36,7 @@ public class Cercle {
         //si no, ja se com ferho: cte que ha de caure
         //si hi ha ratoli: tenc el cercle a una pos i el ratoli que esta a una altra respecte de (0,=), he de restar akests dos vectors i tenc vector dacceleracio
         //quan tenc akest super vector, lhe de normalitzar, i ara l'he de multiplicar per un factor i aixi aqueda visuatlment bé
-        moureCercle();
+        this.moureCercle();
     }
 
     public void moureCercle() {
@@ -49,15 +50,34 @@ public class Cercle {
 
     private void calcularDireccioRebot(Vector posicio) {
         if (posicio.getX() == -1 || posicio.getX() == 0 || posicio.getX() == 1) {
-            this.velocitat.setX(3);
+            if (this.velocitat.getX() < 5) {
+                this.velocitat.setX(this.velocitat.getX() + this.acceleracio.getX());
+            } else {
+                this.velocitat.setX(this.velocitat.getX());
+            }
         } else if (posicio.getX() == 459 || posicio.getX() == 460 || posicio.getX() == 461) {
-            this.velocitat.setX(-3);
+            if (this.velocitat.getX() > -5) {
+                this.velocitat.setX(this.velocitat.getX() + this.acceleracio.getX());
+            } else {
+                this.velocitat.setX(-this.velocitat.getX());
+            }
         }
 
         if (posicio.getY() == -1 || posicio.getY() == 0 || posicio.getY() == 1) {
-            this.velocitat.setY(3);
+            if (this.velocitat.getY() < 5) {
+                this.velocitat.setY(this.velocitat.getY() + this.acceleracio.getY());
+            } else {
+                this.velocitat.setY(this.velocitat.getY());
+            }
         } else if (posicio.getY() == 633 || posicio.getY() == 634 || posicio.getY() == 635) {
-            this.velocitat.setY(-3);
+            System.out.println(posicio);
+            if (this.velocitat.getY() > -5) {
+                System.out.println("> -5");
+                this.velocitat.setY(this.velocitat.getY() + this.acceleracio.getY());
+            } else {
+                System.out.println("< -5");
+                this.velocitat.setY(-this.velocitat.getY());
+            }
         }
     }
 
@@ -74,6 +94,23 @@ public class Cercle {
             this.posicio.setY(0);
         }
 
+    }
+
+    public void pintarCercle(Graphics g) {
+        g.setColor(Color.YELLOW); //definim color de la bolla
+        //pintam la bolla
+        g.fillOval(
+                ((Double) this.posicio.getX()).intValue(),
+                ((Double) this.posicio.getY()).intValue(),
+                this.diamtre,
+                this.diamtre);
+        g.setColor(Color.BLACK); //definim el color del costat
+        //pintam el costat
+        g.drawOval(
+                ((Double) this.posicio.getX()).intValue(),
+                ((Double) this.posicio.getY()).intValue(),
+                this.diamtre,
+                this.diamtre);
     }
 
     public Ellipse2D.Float getCercle() {
@@ -112,11 +149,11 @@ public class Cercle {
         this.velocitat = velocitat;
     }
 
-    public int getAcceleracio() {
+    public Vector getAcceleracio() {
         return acceleracio;
     }
 
-    public void setAcceleracio(int acceleracio) {
+    public void setAcceleracio(Vector acceleracio) {
         this.acceleracio = acceleracio;
     }
 

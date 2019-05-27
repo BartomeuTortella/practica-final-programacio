@@ -23,6 +23,11 @@ public class Panell extends JFrame implements ActionListener {
         inicializarComponentes();   // inicializamos los atributos o componentes
     }
 
+    public static void main(String[] args) {
+        Panell finestra = new Panell();      // creamos una ventana
+        finestra.setVisible(true);
+    }
+
     private void configurarVentana() {
         this.setTitle("Bolles");                                // colocamos titulo a la ventana
         this.setSize(700, 700);                                 // colocamos tamanio a la ventana (ancho, alto)

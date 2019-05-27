@@ -1,5 +1,7 @@
 package treballfinalprogii;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Vector {
 
     private double x;
@@ -32,6 +34,14 @@ public class Vector {
     private void normalitzacio(Vector v) {
         x = v.x / modul;
         y = v.y / modul;
+    }
+
+    public static Vector generarPosicioAleatoria() { //aixo ha d'estar a la classe vector .
+
+        int randomNumX = ThreadLocalRandom.current().nextInt(0, 460 + 1);
+        int randomNumY = ThreadLocalRandom.current().nextInt(0, 634 + 1);
+        Vector vector = new Vector(randomNumX, randomNumY);
+        return vector;
     }
 
     public double getX() {

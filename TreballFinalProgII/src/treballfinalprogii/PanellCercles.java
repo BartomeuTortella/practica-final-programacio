@@ -5,10 +5,8 @@
  */
 package treballfinalprogii;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JPanel;
 
 /**
@@ -20,25 +18,19 @@ public class PanellCercles extends JPanel {
     private Cercle[] cercles;
 
     public PanellCercles() {
-        this.cercles = crearCercles(20);
+        this.cercles = crearCercles(1);
         comencarJoc(); //aixo millor si ho crida la classe Panell
     }
 
     private Cercle[] crearCercles(int numCercles) {
         Cercle[] cercles = new Cercle[numCercles];
         for (int i = 0; i < numCercles; i++) {
-            cercles[i] = new Cercle(generarPosicioAleatoria());
+            cercles[i] = new Cercle(Vector.generarPosicioAleatoria());
         }
         return cercles;
     }
 
-    private Vector generarPosicioAleatoria() { //aixo ha d'estar a la classe vector .
-
-        int randomNumX = ThreadLocalRandom.current().nextInt(0, 460 + 1);
-        int randomNumY = ThreadLocalRandom.current().nextInt(0, 634 + 1);
-        Vector vector = new Vector(randomNumX, randomNumY);
-        return vector;
-    }
+  
 
     private void comencarJoc() {
         Thread gameThread = new Thread() { //aixo millor llevar-ho, per emprar nomes el fil de propi progrmaa primcila
@@ -69,20 +61,7 @@ public class PanellCercles extends JPanel {
             //g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
             cercles[i].moureCercle();
             //millor si tot lo de pintar els cercles ho feim al a classe cercle i aixi queda aqui més net
-            g.setColor(Color.YELLOW); //definim color de la bolla
-            //pintam la bolla
-            g.fillOval(
-                    ((Double) cercles[i].getPosicio().getX()).intValue(),
-                    ((Double) cercles[i].getPosicio().getY()).intValue(),
-                    cercles[i].getDiamtre(),
-                    cercles[i].getDiamtre());
-            g.setColor(Color.BLACK); //definim el color del costat
-            //pintam el costat
-            g.drawOval(
-                    ((Double) cercles[i].getPosicio().getX()).intValue(),
-                    ((Double) cercles[i].getPosicio().getY()).intValue(),
-                    cercles[i].getDiamtre(),
-                    cercles[i].getDiamtre());
+            cercles[i].pintarCercle(g);
 
         }
 

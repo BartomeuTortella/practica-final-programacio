@@ -49,15 +49,15 @@ public class Cercle {
 
     private void calcularDireccioRebot(Vector posicio) {
         if (posicio.getX() == -1 || posicio.getX() == 0 || posicio.getX() == 1) {
-            this.velocitat.setX(2);
+            this.velocitat.setX(3);
         } else if (posicio.getX() == 459 || posicio.getX() == 460 || posicio.getX() == 461) {
-            this.velocitat.setX(-2);
+            this.velocitat.setX(-3);
         }
 
         if (posicio.getY() == -1 || posicio.getY() == 0 || posicio.getY() == 1) {
-            this.velocitat.setY(2);
+            this.velocitat.setY(3);
         } else if (posicio.getY() == 633 || posicio.getY() == 634 || posicio.getY() == 635) {
-            this.velocitat.setY(-2);
+            this.velocitat.setY(-3);
         }
     }
 

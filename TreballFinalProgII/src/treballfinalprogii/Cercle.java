@@ -28,8 +28,8 @@ public class Cercle {
         //this.color = Color.BLUE;
         this.color= new Color (new Random().nextFloat(),new Random().nextFloat(), new Random().nextFloat());
         this.posicio = posicio;
-        this.velocitat = new Vector(3, 3);
-        this.acceleracio = new Vector(0, 1);
+        this.velocitat = new Vector(0, 6);
+        this.acceleracio = new Vector(0, 0.01);
         //sera cte (0,1) cap avall
         //a cada pas de temps a la velocitat li sum lacceleracio, a cada pas de temps calculare la posicio segons la v q dugui + acceleracio
         //velocitat ha de tenir un limit de velocitat i quan hi arribi, es manendra = velocitat es velocitat + acceleracio i si arribaa a limit satura
@@ -51,35 +51,28 @@ public class Cercle {
     }
 
     private void calcularDireccioRebot(Vector posicio) {
-        if (posicio.getX() == -1 || posicio.getX() == 0 || posicio.getX() == 1) {
-            if (this.velocitat.getX() < 5) {
-                this.velocitat.setX(this.velocitat.getX() + this.acceleracio.getX());
-            } else {
-                this.velocitat.setX(this.velocitat.getX());
-            }
-        } else if (posicio.getX() == 459 || posicio.getX() == 460 || posicio.getX() == 461) {
-            if (this.velocitat.getX() > -5) {
-                this.velocitat.setX(this.velocitat.getX() + this.acceleracio.getX());
-            } else {
-                this.velocitat.setX(-this.velocitat.getX());
-            }
+        Vector velocitatAmbNovaAcceleracio = calcularVelocitat(this.velocitat);
+        if (this.velocitat.getX() < 6) {
+            this.velocitat.setX(velocitatAmbNovaAcceleracio.getX());
         }
+        if (this.velocitat.getY() < 6) {
+            this.velocitat.setY(velocitatAmbNovaAcceleracio.getY());
+        }
+        System.out.println(posicio);
 
-        if (posicio.getY() == -1 || posicio.getY() == 0 || posicio.getY() == 1) {
-            if (this.velocitat.getY() < 5) {
-                this.velocitat.setY(this.velocitat.getY() + this.acceleracio.getY());
-            } else {
-                this.velocitat.setY(this.velocitat.getY());
-            }
-        } else if (posicio.getY() == 633 || posicio.getY() == 634 || posicio.getY() == 635) {
-            System.out.println(posicio);
-            if (this.velocitat.getY() > -5) {
-                System.out.println("> -5");
-                this.velocitat.setY(this.velocitat.getY() + this.acceleracio.getY());
-            } else {
-                System.out.println("< -5");
-                this.velocitat.setY(-this.velocitat.getY());
-            }
+        if (posicio.getX() >= -3 && posicio.getX() <= 3) {
+            System.out.println("test 1 x");
+            this.velocitat.setX(-this.velocitat.getX());
+        } else if (posicio.getX() >= 458 && posicio.getX() <= 463) {
+            System.out.println("test 2 x");
+            this.velocitat.setX(-this.velocitat.getX());
+        }
+        if (posicio.getY() >= -3 && posicio.getY() <= 3) {
+            System.out.println("test 1 y");
+            this.velocitat.setY(-this.velocitat.getY());
+        } else if (posicio.getY() >= 630 && posicio.getY() <= 637) {
+            System.out.println("test 2 y");
+            this.velocitat.setY(-this.velocitat.getY());
         }
     }
 
@@ -96,6 +89,22 @@ public class Cercle {
             this.posicio.setY(0);
         }
 
+    }
+
+    private Vector calcularVelocitat(Vector velocitat) {
+        Vector velocitatTemp = velocitat;
+        if (velocitatTemp.getX() > 0) {
+            velocitatTemp.setX((velocitatTemp.getX() + this.acceleracio.getX()));
+        } else {
+            velocitatTemp.setX((velocitatTemp.getX() + this.acceleracio.getX()));
+        }
+
+        if (velocitatTemp.getY() > 0) {
+            velocitatTemp.setY((velocitatTemp.getY() + this.acceleracio.getY()));
+        } else {
+            velocitatTemp.setY((velocitatTemp.getY() + this.acceleracio.getY()));
+        }
+        return velocitatTemp;
     }
 
     public void pintarCercle(Graphics g) {

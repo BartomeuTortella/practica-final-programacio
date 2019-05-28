@@ -30,8 +30,6 @@ public class PanellCercles extends JPanel {
         return cercles;
     }
 
-  
-
     private void comencarJoc() {
         Thread gameThread = new Thread() { //aixo millor llevar-ho, per emprar nomes el fil de propi progrmaa primcila
             //al main de la classe main he de cridar akest metode perque tot se posi enmarxa (amb el while true)

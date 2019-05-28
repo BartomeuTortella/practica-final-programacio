@@ -18,7 +18,7 @@ public class PanellCercles extends JPanel {
     private Cercle[] cercles;
 
     public PanellCercles() {
-        this.cercles = crearCercles(1);
+        this.cercles = crearCercles(5);
         comencarJoc(); //aixo millor si ho crida la classe Panell
     }
 

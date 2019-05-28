@@ -8,6 +8,7 @@ package treballfinalprogii;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Ellipse2D;
+import java.util.Random;
 
 /**
  *
@@ -24,7 +25,8 @@ public class Cercle {
 
     public Cercle(Vector posicio) {
         this.diamtre = 40;
-        this.color = Color.BLUE;
+        //this.color = Color.BLUE;
+        this.color= new Color (new Random().nextFloat(),new Random().nextFloat(), new Random().nextFloat());
         this.posicio = posicio;
         this.velocitat = new Vector(3, 3);
         this.acceleracio = new Vector(0, 1);
@@ -97,7 +99,8 @@ public class Cercle {
     }
 
     public void pintarCercle(Graphics g) {
-        g.setColor(Color.YELLOW); //definim color de la bolla
+        g.setColor(this.color);
+        //g.setColor(Color.YELLOW); //definim color de la bolla
         //pintam la bolla
         g.fillOval(
                 ((Double) this.posicio.getX()).intValue(),

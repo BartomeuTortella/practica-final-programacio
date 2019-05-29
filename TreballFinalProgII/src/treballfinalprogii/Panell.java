@@ -21,7 +21,7 @@ public class Panell extends JFrame implements ActionListener {
     public Panell() {
         super();                    // usamos el contructor de la clase padre JFrame
         configurarVentana();        // configuramos la ventana
-        panellCercles = new PanellCercles();
+        panellCercles = new PanellCercles(numeroBolles);
         inicializarComponentes();   // inicializamos los atributos o componentes
     }
 
@@ -58,9 +58,13 @@ public class Panell extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent event) {
 
         try {
-            int nom = Integer.parseInt(caixaNumeroBolles.getText());// obtenemos el contenido de la caja de texto
+            int tempNumBolles = Integer.parseInt(caixaNumeroBolles.getText());// obtenemos el contenido de la caja de texto
+            if (tempNumBolles != this.numeroBolles) {
+                this.numeroBolles = tempNumBolles;
+                this.panellCercles.setNumeroBolles(numeroBolles);
+                System.out.println(numeroBolles);
+            }
             this.panellCercles.setTeLimits(this.activarLimits.isSelected());
-            System.out.println(nom);
         } catch (Exception exe) {
             System.out.println(exe);
         }

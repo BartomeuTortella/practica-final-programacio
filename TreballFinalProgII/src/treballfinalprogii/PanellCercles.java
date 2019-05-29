@@ -18,8 +18,8 @@ public class PanellCercles extends JPanel {
     private Cercle[] cercles;
     private boolean teLimits = false;
 
-    public PanellCercles() {
-        this.cercles = crearCercles(5);
+    public PanellCercles(int numeroBolles) {
+        this.cercles = crearCercles(numeroBolles);
         comencarJoc(); //aixo millor si ho crida la classe Panell
     }
 
@@ -54,6 +54,10 @@ public class PanellCercles extends JPanel {
 
     public void setTeLimits(boolean teLimits) {
         this.teLimits = teLimits;
+    }
+
+    public void setNumeroBolles(int numeroBolles) {
+        this.cercles = crearCercles(numeroBolles);
     }
 
     @Override

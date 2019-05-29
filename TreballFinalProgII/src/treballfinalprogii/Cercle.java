@@ -27,7 +27,7 @@ public class Cercle {
         this.diamtre = 40;
         this.color = new Color(new Random().nextFloat(), new Random().nextFloat(), new Random().nextFloat());
         this.posicio = posicio;
-        this.velocitat = new Vector(0, 1);
+        this.velocitat = new Vector(5, 0);
         this.acceleracio = new Vector(0, 0.1);
         //sera cte (0,1) cap avall
         //a cada pas de temps a la velocitat li sum lacceleracio, a cada pas de temps calculare la posicio segons la v q dugui + acceleracio
@@ -46,15 +46,15 @@ public class Cercle {
     }
 
     private void calcularDireccio(Vector posicio) {
-        calcularDireccioContinu(posicio);
+        calcularDireccioRebot(posicio);
     }
 
     private void comprovarAcceleracioLimit() {
         Vector velocitatAmbNovaAcceleracio = calcularVelocitat();
-        if (this.velocitat.getX() < 6) {
+        if (this.velocitat.getX() < 10) {
             this.velocitat.setX(velocitatAmbNovaAcceleracio.getX());
         }
-        if (this.velocitat.getY() < 6) {
+        if (this.velocitat.getY() < 10) {
             this.velocitat.setY(velocitatAmbNovaAcceleracio.getY());
         }
     }
@@ -76,10 +76,10 @@ public class Cercle {
 
     private void calcularDireccioContinu(Vector posicio) {
         comprovarAcceleracioLimit();
-        if (posicio.getX() >= -10 && posicio.getX() <= 0) {
-            this.posicio.setX(458);
+        if (posicio.getX() >= -10 && posicio.getX() <= -5) {
+            this.posicio.setX(490);
         } else if (posicio.getX() >= 495 && posicio.getX() <= 505) {
-            this.posicio.setX(-10);
+            this.posicio.setX(-4);
         }
 
         if (posicio.getY() >= -10 && posicio.getY() <= -5) {

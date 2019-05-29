@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -12,6 +13,7 @@ public class Panell extends JFrame implements ActionListener {
 
     private JLabel texto;           // etiqueta o texto no editable
     private JTextField caixaNumeroBolles;        // caja de texto, para insertar datos
+    private JCheckBox activarLimits;
     private JButton boton;          // boton con una determinada accion
     private PanellCercles panellCercles;
     private int numeroBolles = 5;
@@ -35,21 +37,27 @@ public class Panell extends JFrame implements ActionListener {
         this.setLayout(null);                                   // no usamos ningun layout, solo asi podremos dar posiciones a los componentes
         this.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
-        this.getContentPane().setBackground(Color.DARK_GRAY);
+        this.getContentPane().setBackground(Color.GRAY);
     }
 
     private void inicializarComponentes() {
         this.getContentPane().add(panellCercles);
         this.panellCercles.setBounds(0, 0, 500, 700);
         this.caixaNumeroBolles = new JTextField();
-        this.caixaNumeroBolles.setBounds(550, 50, 100, 25);
+        this.caixaNumeroBolles.setBounds(550, 150, 100, 25);
         this.caixaNumeroBolles.setText(Integer.toString(this.numeroBolles));
         this.getContentPane().add(this.caixaNumeroBolles);
         this.caixaNumeroBolles.addActionListener(this);
+        this.activarLimits = new JCheckBox();
+        this.activarLimits.setBounds(547, 200, 25,25);
+        this.getContentPane().add(this.activarLimits);
+        this.activarLimits.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
+        System.out.println(this.activarLimits.isSelected());
+        
         try {
             int nom = Integer.parseInt(caixaNumeroBolles.getText());// obtenemos el contenido de la caja de texto
             System.out.println(nom);

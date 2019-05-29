@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 public class PanellCercles extends JPanel {
 
     private Cercle[] cercles;
+    private boolean teLimits = false;
 
     public PanellCercles() {
         this.cercles = crearCercles(5);
@@ -45,6 +46,14 @@ public class PanellCercles extends JPanel {
             }
         };
         gameThread.start();  // Callback run() //tb sen ha danar
+    }
+
+    public boolean isTeLimits() {
+        return teLimits;
+    }
+
+    public void setTeLimits(boolean teLimits) {
+        this.teLimits = teLimits;
     }
 
     @Override

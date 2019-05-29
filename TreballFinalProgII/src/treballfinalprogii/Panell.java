@@ -49,17 +49,17 @@ public class Panell extends JFrame implements ActionListener {
         this.getContentPane().add(this.caixaNumeroBolles);
         this.caixaNumeroBolles.addActionListener(this);
         this.activarLimits = new JCheckBox();
-        this.activarLimits.setBounds(547, 200, 25,25);
+        this.activarLimits.setBounds(547, 200, 25, 25);
         this.getContentPane().add(this.activarLimits);
         this.activarLimits.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        System.out.println(this.activarLimits.isSelected());
-        
+
         try {
             int nom = Integer.parseInt(caixaNumeroBolles.getText());// obtenemos el contenido de la caja de texto
+            this.panellCercles.setTeLimits(this.activarLimits.isSelected());
             System.out.println(nom);
         } catch (Exception exe) {
             System.out.println(exe);

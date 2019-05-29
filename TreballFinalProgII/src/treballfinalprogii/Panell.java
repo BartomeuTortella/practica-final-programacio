@@ -1,6 +1,7 @@
 package treballfinalprogii;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -51,7 +52,17 @@ public class Panell extends JFrame implements ActionListener {
         this.activarLimits = new JCheckBox();
         this.activarLimits.setBounds(547, 200, 25, 25);
         this.getContentPane().add(this.activarLimits);
-        this.activarLimits.addActionListener(this);
+        
+        
+        
+        //Caract de l'etiqueta
+        this.texto = new JLabel();
+        this.texto.setText("Número de bolles:");
+        this.texto.setFont(new Font("Serif", Font.BOLD,13));
+        this.texto.setBounds(530, 100, 105, 30);
+        this.texto.setLayout(null);
+        this.getContentPane().add(this.texto);
+        
     }
 
     @Override

@@ -7,19 +7,23 @@ package treballfinalprogii;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 
 /**
  *
  * @author mery
  */
-public class PanellCercles extends JPanel {
+public class PanellCercles extends JPanel implements MouseMotionListener {
 
     private Cercle[] cercles;
     private boolean teLimits = false;
+    private boolean seguirRatoli = false;
 
     public PanellCercles(int numeroBolles) {
         this.cercles = crearCercles(numeroBolles);
+        this.addMouseMotionListener(this);
     }
 
     private Cercle[] crearCercles(int numCercles) {
@@ -31,7 +35,6 @@ public class PanellCercles extends JPanel {
     }
 
     public void comencarJoc() {
-
 
         Thread gameThread = new Thread() { //aixo millor llevar-ho, per emprar nomes el fil de propi progrmaa primcila
             //al main de la classe main he de cridar akest metode perque tot se posi enmarxa (amb el while true)
@@ -57,6 +60,14 @@ public class PanellCercles extends JPanel {
         this.teLimits = teLimits;
     }
 
+    public boolean getSeguirRatoli() {
+        return seguirRatoli;
+    }
+
+    public void setSeguirRatoli(boolean seguirRatoli) {
+        this.seguirRatoli = seguirRatoli;
+    }
+
     public void setNumeroBolles(int numeroBolles) {
         this.cercles = crearCercles(numeroBolles);
     }
@@ -70,11 +81,20 @@ public class PanellCercles extends JPanel {
         // Draw the ball
         for (int i = 0; i < cercles.length; i++) {
             //g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
-            cercles[i].moureCercle(this.teLimits);
+            cercles[i].moureCercle(this.teLimits, this.seguirRatoli);
             //millor si tot lo de pintar els cercles ho feim al a classe cercle i aixi queda aqui més net
             cercles[i].pintarCercle(g);
-
         }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        //no s'utiltiza
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        Vector posicioCursor = new Vector(e.getPoint().x, e.getPoint().y);
 
     }
 

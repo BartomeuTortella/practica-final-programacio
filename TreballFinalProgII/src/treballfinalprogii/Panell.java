@@ -15,8 +15,9 @@ public class Panell extends JFrame implements ActionListener {
     private JLabel textNumBolles;           // etiqueta o texto no editable
     private JTextField caixaNumeroBolles;        // caja de texto, para insertar datos
     private JCheckBox activarLimits;
+    private JCheckBox activarRatoli;
     private JButton boton;          // boton con una determinada accion
-    private PanellCercles panellCercles;
+    private final PanellCercles panellCercles;
     private int numeroBolles = 5;
 
     public Panell() {
@@ -63,11 +64,18 @@ public class Panell extends JFrame implements ActionListener {
         this.textNumBolles.setLayout(null);
         this.getContentPane().add(this.textNumBolles);
 
+        this.activarRatoli = new JCheckBox();
+        this.activarRatoli.setBounds(547, 250, 25, 25);
+        this.getContentPane().add(this.activarRatoli);
+        this.activarRatoli.addActionListener(this);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
         this.panellCercles.setTeLimits(this.activarLimits.isSelected());
+        this.panellCercles.setSeguirRatoli(this.activarRatoli.isSelected());
+
         try {
             int tempNumBolles = Integer.parseInt(caixaNumeroBolles.getText());// obtenemos el contenido de la caja de texto
             if (tempNumBolles != this.numeroBolles) {

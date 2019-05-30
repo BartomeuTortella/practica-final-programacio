@@ -37,10 +37,10 @@ public class Cercle {
         //si no, ja se com ferho: cte que ha de caure
         //si hi ha ratoli: tenc el cercle a una pos i el ratoli que esta a una altra respecte de (0,=), he de restar akests dos vectors i tenc vector dacceleracio
         //quan tenc akest super vector, lhe de normalitzar, i ara l'he de multiplicar per un factor i aixi aqueda visuatlment bé
-        this.moureCercle(false);
+        this.moureCercle(false, false);
     }
 
-    public void moureCercle(boolean teLimits) {
+    public void moureCercle(boolean teLimits, boolean seguirRatoli) {
         this.posicio.suma(this.velocitat);
         calcularDireccio(teLimits);
     }

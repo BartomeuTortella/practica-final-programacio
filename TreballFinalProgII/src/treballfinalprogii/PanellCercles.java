@@ -56,8 +56,7 @@ public class PanellCercles extends JPanel {
                     }
                 }
             }
-        };
-        gameThread.start();  // Callback run() //tb sen ha danar
+        }
     }
 
     public boolean teLimits() {
@@ -72,9 +71,9 @@ public class PanellCercles extends JPanel {
         this.cercles = crearCercles(numeroBolles);
     }
 
-    @Override
-
+    @Override 
     public void paintComponent(Graphics g) {
+        System.out.println("paint");
         Graphics2D g2d = (Graphics2D) g;
         // Draw the box
         g.setColor(java.awt.Color.LIGHT_GRAY);

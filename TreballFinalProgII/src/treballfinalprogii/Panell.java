@@ -24,6 +24,7 @@ public class Panell extends JFrame implements ActionListener {
         configurarVentana();        // configuramos la ventana
         panellCercles = new PanellCercles(numeroBolles);
         inicializarComponentes();   // inicializamos los atributos o componentes
+        panellCercles.run();
     }
 
     public static void main(String[] args) {

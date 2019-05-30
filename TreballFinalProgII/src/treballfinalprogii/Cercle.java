@@ -37,11 +37,77 @@ public class Cercle {
         //si no, ja se com ferho: cte que ha de caure
         //si hi ha ratoli: tenc el cercle a una pos i el ratoli que esta a una altra respecte de (0,=), he de restar akests dos vectors i tenc vector dacceleracio
         //quan tenc akest super vector, lhe de normalitzar, i ara l'he de multiplicar per un factor i aixi aqueda visuatlment bé
-        this.moureCercle();
+        this.moureCercle(false);
     }
 
-    public void moureCercle() {
+    public void moureCercle(boolean teLimits) {
         this.posicio.suma(this.velocitat);
+        calcularDireccio(teLimits);
+    }
+
+    private void calcularDireccio(boolean teLimits) {
+        if (teLimits) {
+            this.calcularDireccioRebot();
+        } else {
+            this.calcularDireccioContinu();
+        }
+    }
+
+    private void comprovarAcceleracioLimit() {
+        Vector velocitatAmbNovaAcceleracio = calcularVelocitat();
+        if (this.velocitat.getX() < 10) {
+            this.velocitat.setX(velocitatAmbNovaAcceleracio.getX());
+        }
+        if (this.velocitat.getY() < 10) {
+            this.velocitat.setY(velocitatAmbNovaAcceleracio.getY());
+        }
+    }
+
+    private void calcularDireccioRebot() {
+        comprovarAcceleracioLimit();
+        //////////////////////////////////////////////////
+        if (this.posicio.getX() >= -3 && this.posicio.getX() <= 3) {
+            this.velocitat.setX(-this.getVelocitat().getX());
+        } else if (this.posicio.getX() >= 458 && posicio.getX() <= 463) {
+            this.velocitat.setX(-this.velocitat.getX());
+        }
+        if (this.posicio.getY() >= -3 && this.posicio.getY() <= 3) {
+            this.velocitat.setY(-this.velocitat.getY());
+        } else if (this.posicio.getY() >= 630 && this.posicio.getY() <= 637) {
+            this.velocitat.setY(-this.velocitat.getY());
+        }
+    }
+
+    private void calcularDireccioContinu() {
+        comprovarAcceleracioLimit();
+        if (this.posicio.getX() >= -10 && this.posicio.getX() <= -5) {
+            this.posicio.setX(490);
+        } else if (this.posicio.getX() >= 495 && this.posicio.getX() <= 505) {
+            this.posicio.setX(-4);
+        }
+
+        if (this.posicio.getY() >= -10 && this.posicio.getY() <= -5) {
+            this.posicio.setY(632);
+        } else if (this.posicio.getY() >= 685 && this.posicio.getY() <= 695) {
+            this.posicio.setY(-4);
+        }
+
+    }
+
+    private Vector calcularVelocitat() {
+        Vector velocitatTemp = new Vector(0, 0);
+        if (this.velocitat.getX() > 0) {
+            velocitatTemp.setX((this.velocitat.getX() + this.acceleracio.getX()));
+        } else {
+            velocitatTemp.setX((this.velocitat.getX() + this.acceleracio.getX()));
+        }
+
+        if (this.velocitat.getY() > 0) {
+            velocitatTemp.setY((this.velocitat.getY() + this.acceleracio.getY()));
+        } else {
+            velocitatTemp.setY((this.velocitat.getY() + this.acceleracio.getY()));
+        }
+        return velocitatTemp;
     }
 
     public void pintarCercle(Graphics g) {

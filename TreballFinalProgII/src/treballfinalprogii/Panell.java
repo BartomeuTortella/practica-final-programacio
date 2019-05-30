@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 public class Panell extends JFrame implements ActionListener {
 
-    private JLabel texto;           // etiqueta o texto no editable
+    private JLabel textNumBolles;           // etiqueta o texto no editable
     private JTextField caixaNumeroBolles;        // caja de texto, para insertar datos
     private JCheckBox activarLimits;
     private JButton boton;          // boton con una determinada accion
@@ -52,22 +52,22 @@ public class Panell extends JFrame implements ActionListener {
         this.activarLimits = new JCheckBox();
         this.activarLimits.setBounds(547, 200, 25, 25);
         this.getContentPane().add(this.activarLimits);
-        
-        
-        
+        this.activarLimits.addActionListener(this);
+
         //Caract de l'etiqueta
-        this.texto = new JLabel();
-        this.texto.setText("Número de bolles:");
-        this.texto.setFont(new Font("Serif", Font.BOLD,13));
-        this.texto.setBounds(530, 100, 105, 30);
-        this.texto.setLayout(null);
-        this.getContentPane().add(this.texto);
-        
+        this.textNumBolles = new JLabel();
+        this.textNumBolles.setText("Número de bolles:");
+        this.textNumBolles.setFont(new Font("Serif", Font.BOLD, 13));
+        this.textNumBolles.setBounds(530, 100, 150, 30);
+        this.textNumBolles.setLayout(null);
+        this.getContentPane().add(this.textNumBolles);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-
+        this.panellCercles.setTeLimits(this.activarLimits.isSelected());
+        System.out.println(this.panellCercles.teLimits());
         try {
             int tempNumBolles = Integer.parseInt(caixaNumeroBolles.getText());// obtenemos el contenido de la caja de texto
             if (tempNumBolles != this.numeroBolles) {
@@ -75,7 +75,7 @@ public class Panell extends JFrame implements ActionListener {
                 this.panellCercles.setNumeroBolles(numeroBolles);
                 System.out.println(numeroBolles);
             }
-            this.panellCercles.setTeLimits(this.activarLimits.isSelected());
+
         } catch (Exception exe) {
             System.out.println(exe);
         }

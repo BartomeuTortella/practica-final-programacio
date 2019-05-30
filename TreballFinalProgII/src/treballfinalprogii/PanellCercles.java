@@ -7,9 +7,6 @@ package treballfinalprogii;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Timer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -23,7 +20,6 @@ public class PanellCercles extends JPanel {
 
     public PanellCercles(int numeroBolles) {
         this.cercles = crearCercles(numeroBolles);
-        comencarJoc(); //aixo millor si ho crida la classe Panell
     }
 
     private Cercle[] crearCercles(int numCercles) {
@@ -34,15 +30,8 @@ public class PanellCercles extends JPanel {
         return cercles;
     }
 
-    private void comencarJoc() {
-//        try {
-//
-//            Thread.sleep(1);
-//            repaint();
-//
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(PanellCercles.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+    public void comencarJoc() {
+
 
         Thread gameThread = new Thread() { //aixo millor llevar-ho, per emprar nomes el fil de propi progrmaa primcila
             //al main de la classe main he de cridar akest metode perque tot se posi enmarxa (amb el while true)
@@ -56,7 +45,8 @@ public class PanellCercles extends JPanel {
                     }
                 }
             }
-        }
+        };
+        gameThread.start();
     }
 
     public boolean teLimits() {
@@ -71,9 +61,8 @@ public class PanellCercles extends JPanel {
         this.cercles = crearCercles(numeroBolles);
     }
 
-    @Override 
+    @Override
     public void paintComponent(Graphics g) {
-        System.out.println("paint");
         Graphics2D g2d = (Graphics2D) g;
         // Draw the box
         g.setColor(java.awt.Color.LIGHT_GRAY);
@@ -88,6 +77,5 @@ public class PanellCercles extends JPanel {
         }
 
     }
-
 
 }

@@ -24,7 +24,7 @@ public class Panell extends JFrame implements ActionListener {
         configurarVentana();        // configuramos la ventana
         panellCercles = new PanellCercles(numeroBolles);
         inicializarComponentes();   // inicializamos los atributos o componentes
-        panellCercles.run();
+        panellCercles.comencarJoc();
     }
 
     public static void main(String[] args) {
@@ -68,13 +68,11 @@ public class Panell extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         this.panellCercles.setTeLimits(this.activarLimits.isSelected());
-        System.out.println(this.panellCercles.teLimits());
         try {
             int tempNumBolles = Integer.parseInt(caixaNumeroBolles.getText());// obtenemos el contenido de la caja de texto
             if (tempNumBolles != this.numeroBolles) {
                 this.numeroBolles = tempNumBolles;
                 this.panellCercles.setNumeroBolles(numeroBolles);
-                System.out.println(numeroBolles);
             }
 
         } catch (Exception exe) {

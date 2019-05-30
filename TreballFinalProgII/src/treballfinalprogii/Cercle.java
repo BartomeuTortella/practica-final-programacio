@@ -66,12 +66,12 @@ public class Cercle {
     private void calcularDireccioRebot() {
         comprovarAcceleracioLimit();
         //////////////////////////////////////////////////
-        if (this.posicio.getX() >= -3 && this.posicio.getX() <= 3) {
+        if (this.posicio.getX() >= -6 && this.posicio.getX() <= 3) {
             this.velocitat.setX(-this.getVelocitat().getX());
-        } else if (this.posicio.getX() >= 458 && posicio.getX() <= 463) {
+        } else if (this.posicio.getX() >= 458 && posicio.getX() <= 492) {
             this.velocitat.setX(-this.velocitat.getX());
         }
-        if (this.posicio.getY() >= -3 && this.posicio.getY() <= 3) {
+        if (this.posicio.getY() >= -6 && this.posicio.getY() <= 3) {
             this.velocitat.setY(-this.velocitat.getY());
         } else if (this.posicio.getY() >= 630 && this.posicio.getY() <= 637) {
             this.velocitat.setY(-this.velocitat.getY());

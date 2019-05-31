@@ -21,28 +21,31 @@ public class Cercle {
     private Vector posicio;
     private Vector velocitat;
     private Vector acceleracio;
+    private Vector acceleracioMouse;
     private Ellipse2D.Float cercle;
+    private final int velocitatLimit = 10;
 
     public Cercle(Vector posicio) {
         this.diamtre = 40;
         this.color = new Color(new Random().nextFloat(), new Random().nextFloat(), new Random().nextFloat());
         this.posicio = posicio;
-        this.velocitat = new Vector(5, 0);
-        this.acceleracio = new Vector(0, 0.1);
-        //sera cte (0,1) cap avall
-        //a cada pas de temps a la velocitat li sum lacceleracio, a cada pas de temps calculare la posicio segons la v q dugui + acceleracio
-        //velocitat ha de tenir un limit de velocitat i quan hi arribi, es manendra = velocitat es velocitat + acceleracio i si arribaa a limit satura
-        //he de programar dsps si hi ha intereaccio amb ratoli
-        //en es metode de calcular la nova pos del cercle hi ha cond de si he de seguir o no el ratoli
-        //si no, ja se com ferho: cte que ha de caure
+        this.velocitat = new Vector(0, 1);
+        this.acceleracio = new Vector(0.01, 0.1);
         //si hi ha ratoli: tenc el cercle a una pos i el ratoli que esta a una altra respecte de (0,=), he de restar akests dos vectors i tenc vector dacceleracio
         //quan tenc akest super vector, lhe de normalitzar, i ara l'he de multiplicar per un factor i aixi aqueda visuatlment bé
-        this.moureCercle(false, false);
+        this.moureCercle(false, false, null);
     }
 
-    public void moureCercle(boolean teLimits, boolean seguirRatoli) {
+    public void moureCercle(boolean teLimits, boolean seguirRatoli, Vector posicioMouse) {
         this.posicio.suma(this.velocitat);
-        calcularDireccio(teLimits);
+        if (seguirRatoli) {
+//agafam un cercle i cridam al metode q ens calcula la seva accleracio provocada pel mouse
+//acceleracio mouse: sera restar vectorPosMouse - PosBolla ----> normalitzam ---> mult per factor
+//adjudicam a la bolla la seva nova pos--> pos anterior bolla + acceleracio
+            this.acceleracioMouse = calcularAcceleracioSegonsMouse(posicioMouse);
+        } else {
+            calcularDireccio(teLimits);
+        }
     }
 
     private void calcularDireccio(boolean teLimits) {
@@ -53,42 +56,42 @@ public class Cercle {
         }
     }
 
-    private void comprovarAcceleracioLimit() {
+    private void comprovarVelocitatLimit() {
         Vector velocitatAmbNovaAcceleracio = calcularVelocitat();
-        if (this.velocitat.getX() < 10) {
+        if (this.velocitat.getX() < this.velocitatLimit) {
             this.velocitat.setX(velocitatAmbNovaAcceleracio.getX());
         }
-        if (this.velocitat.getY() < 10) {
+        if (this.velocitat.getY() < this.velocitatLimit) {
             this.velocitat.setY(velocitatAmbNovaAcceleracio.getY());
         }
     }
 
+    //parets
     private void calcularDireccioRebot() {
-        comprovarAcceleracioLimit();
-        //////////////////////////////////////////////////
-        if (this.posicio.getX() >= -6 && this.posicio.getX() <= 3) {
+        comprovarVelocitatLimit();
+        if (this.posicio.getX() < 0) {
             this.velocitat.setX(-this.getVelocitat().getX());
-        } else if (this.posicio.getX() >= 458 && posicio.getX() <= 492) {
+        } else if (this.posicio.getX() > (Panell.margeXPanellCercles - this.diamtre)) {
             this.velocitat.setX(-this.velocitat.getX());
         }
-        if (this.posicio.getY() >= -6 && this.posicio.getY() <= 3) {
+        if (this.posicio.getY() < 0) {
             this.velocitat.setY(-this.velocitat.getY());
-        } else if (this.posicio.getY() >= 630 && this.posicio.getY() <= 637) {
+        } else if (this.posicio.getY() > (Panell.margeYPanellCercles - 60)) {
             this.velocitat.setY(-this.velocitat.getY());
         }
     }
 
     private void calcularDireccioContinu() {
-        comprovarAcceleracioLimit();
-        if (this.posicio.getX() >= -10 && this.posicio.getX() <= -5) {
-            this.posicio.setX(490);
-        } else if (this.posicio.getX() >= 495 && this.posicio.getX() <= 505) {
-            this.posicio.setX(-4);
+        comprovarVelocitatLimit();
+        if (this.posicio.getX() < 0 - 100) {
+            this.posicio.setX(Panell.margeXPanellCercles);
+        } else if (this.posicio.getX() > Panell.margeXPanellCercles + 120) {
+            this.posicio.setX(0);
         }
 
-        if (this.posicio.getY() >= -10 && this.posicio.getY() <= -5) {
-            this.posicio.setY(632);
-        } else if (this.posicio.getY() >= 685 && this.posicio.getY() <= 695) {
+        if (this.posicio.getY() < 0 - 100) {
+            this.posicio.setY(Panell.margeYPanellCercles);
+        } else if (this.posicio.getY() > Panell.margeYPanellCercles) {
             this.posicio.setY(-4);
         }
 
@@ -110,6 +113,14 @@ public class Cercle {
         return velocitatTemp;
     }
 
+    private Vector calcularAcceleracioSegonsMouse(Vector posicioMouse) {
+        posicioMouse.resta(this.posicio);
+        posicioMouse.getModul();
+        //mult x factor
+        return posicioMouse;
+    }
+
+    //Direccio i velocitat amb mouse
     public void pintarCercle(Graphics g) {
         g.setColor(this.color); //definim color de la bolla
         //pintam la bolla

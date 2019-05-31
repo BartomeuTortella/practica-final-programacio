@@ -17,25 +17,29 @@ public class Panell extends JFrame implements ActionListener {
     private JCheckBox activarLimits;
     private JCheckBox activarRatoli;
     private JButton boton;          // boton con una determinada accion
-    private final PanellCercles panellCercles;
+    private PanellCercles panellCercles;
     private int numeroBolles = 5;
+    public static final int margeXFinestra = 1000;
+    public static final int margeYFinestra = 700;
+    public static final int margeXPanellCercles = 800;
+    public static final int margeYPanellCercles = 700;
 
     public Panell() {
         super();                    // usamos el contructor de la clase padre JFrame
-        configurarVentana();        // configuramos la ventana
-        panellCercles = new PanellCercles(numeroBolles);
-        inicializarComponentes();   // inicializamos los atributos o componentes
-        panellCercles.comencarJoc();
+        configurarFinestra();        // configuramos la ventana
     }
 
     public static void main(String[] args) {
         Panell finestra = new Panell();      // creamos una ventana
+        finestra.setPanellCercles(5);
+        finestra.inicializarComponentes();   // inicializamos los atributos o componentes
         finestra.setVisible(true);
+        finestra.panellCercles.comencarJoc();
     }
 
-    private void configurarVentana() {
+    private void configurarFinestra() {
         this.setTitle("Bolles");                                // colocamos titulo a la ventana
-        this.setSize(700, 700);                                 // colocamos tamanio a la ventana (ancho, alto)
+        this.setSize(margeXFinestra, margeYFinestra);                                 // colocamos tamanio a la ventana (ancho, alto)
         this.setLocationRelativeTo(null);                       // centramos la ventana en la pantalla
         this.setLayout(null);                                   // no usamos ningun layout, solo asi podremos dar posiciones a los componentes
         this.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
@@ -45,14 +49,14 @@ public class Panell extends JFrame implements ActionListener {
 
     private void inicializarComponentes() {
         this.getContentPane().add(panellCercles);
-        this.panellCercles.setBounds(0, 0, 500, 700);
+        this.panellCercles.setBounds(0, 0, margeXPanellCercles, margeYPanellCercles);
         this.caixaNumeroBolles = new JTextField();
-        this.caixaNumeroBolles.setBounds(550, 150, 100, 25);
+        this.caixaNumeroBolles.setBounds(margeXPanellCercles + 50, 150, 100, 25);
         this.caixaNumeroBolles.setText(Integer.toString(this.numeroBolles));
         this.getContentPane().add(this.caixaNumeroBolles);
         this.caixaNumeroBolles.addActionListener(this);
         this.activarLimits = new JCheckBox();
-        this.activarLimits.setBounds(547, 200, 25, 25);
+        this.activarLimits.setBounds(margeXPanellCercles + 47, 200, 25, 25);
         this.getContentPane().add(this.activarLimits);
         this.activarLimits.addActionListener(this);
 
@@ -60,15 +64,19 @@ public class Panell extends JFrame implements ActionListener {
         this.textNumBolles = new JLabel();
         this.textNumBolles.setText("Número de bolles:");
         this.textNumBolles.setFont(new Font("Serif", Font.BOLD, 13));
-        this.textNumBolles.setBounds(530, 100, 150, 30);
+        this.textNumBolles.setBounds(margeXPanellCercles + 30, 100, 150, 30);
         this.textNumBolles.setLayout(null);
         this.getContentPane().add(this.textNumBolles);
 
         this.activarRatoli = new JCheckBox();
-        this.activarRatoli.setBounds(547, 250, 25, 25);
+        this.activarRatoli.setBounds(margeXPanellCercles + 47, 250, 25, 25);
         this.getContentPane().add(this.activarRatoli);
         this.activarRatoli.addActionListener(this);
 
+    }
+
+    public void setPanellCercles(int numeroBolles) {
+        this.panellCercles = new PanellCercles(numeroBolles);
     }
 
     @Override

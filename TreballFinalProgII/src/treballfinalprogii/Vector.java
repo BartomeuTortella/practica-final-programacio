@@ -1,3 +1,7 @@
+/*
+ * Bartomeu Tortella Garcias i Maria Orell Monserrat
+ *
+ */
 package treballfinalprogii;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,6 +26,8 @@ public class Vector {
         x -= v.getX();
         y -= v.getY();
     }
+    
+    //CANVIAR NOM
 
     //Normalitzar vector --> fer-lo unitari. Hem de fer el mòdul (arrel quadrada de sumar elements vector al quadrat); 
     // i dividim cada element pel modul.

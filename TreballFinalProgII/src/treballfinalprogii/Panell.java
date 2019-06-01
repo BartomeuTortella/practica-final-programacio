@@ -22,7 +22,7 @@ public class Panell extends JFrame implements ActionListener {
     private JTextField caixaNumeroBolles;        // caja de texto, para insertar datos
     private JCheckBox activarLimits;
     private JCheckBox activarRatoli;
-    
+
     private PanellCercles panellCercles;
     private int numeroBolles = 5;
     public static final int margeXFinestra = 1000;
@@ -37,7 +37,7 @@ public class Panell extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         Panell finestra = new Panell();      // creamos una ventana
-        finestra.setPanellCercles(5);
+        finestra.setPanellCercles(finestra.getNumeroBolles());
         finestra.inicializarComponentes();   // inicializamos los atributos o componentes
         finestra.setVisible(true);
         finestra.panellCercles.comencarJoc();
@@ -56,18 +56,18 @@ public class Panell extends JFrame implements ActionListener {
     private void inicializarComponentes() {
         this.getContentPane().add(panellCercles);
         this.panellCercles.setBounds(0, 0, margeXPanellCercles, margeYPanellCercles);
-        
+
         this.caixaNumeroBolles = new JTextField();
         this.caixaNumeroBolles.setBounds(margeXPanellCercles + 50, 150, 100, 25);
         this.caixaNumeroBolles.setText(Integer.toString(this.numeroBolles));
         this.getContentPane().add(this.caixaNumeroBolles);
         this.caixaNumeroBolles.addActionListener(this);
-        
+
         this.activarLimits = new JCheckBox();
         this.activarLimits.setBounds(margeXPanellCercles + 20, 200, 25, 25);
         this.getContentPane().add(this.activarLimits);
         this.activarLimits.addActionListener(this);
-        
+
         this.activarRatoli = new JCheckBox();
         this.activarRatoli.setBounds(margeXPanellCercles + 20, 250, 25, 25);
         this.getContentPane().add(this.activarRatoli);
@@ -80,23 +80,27 @@ public class Panell extends JFrame implements ActionListener {
         this.textNumBolles.setBounds(margeXPanellCercles + 50, 100, 150, 30);
         this.textNumBolles.setLayout(null);
         this.getContentPane().add(this.textNumBolles);
-        
+
         this.textWithWalls = new JLabel();
         this.textWithWalls.setText("With walls");
-        this.textWithWalls.setBounds(margeXPanellCercles + 40, 200, 25, 25);
+        this.textWithWalls.setBounds(margeXPanellCercles + 50, 200, 100, 25);
         this.textWithWalls.setLayout(null);
         this.getContentPane().add(this.textWithWalls);
-        
+
         this.textFollowMouse = new JLabel();
         this.textFollowMouse.setText("Follow mouse");
-        this.textFollowMouse.setBounds(margeXPanellCercles + 40, 250, 25, 25);
+        this.textFollowMouse.setBounds(margeXPanellCercles + 50, 250, 100, 25);
         this.textFollowMouse.setLayout(null);
         this.getContentPane().add(this.textFollowMouse);
-        
+
     }
 
     public void setPanellCercles(int numeroBolles) {
         this.panellCercles = new PanellCercles(numeroBolles);
+    }
+
+    public int getNumeroBolles() {
+        return numeroBolles;
     }
 
     @Override

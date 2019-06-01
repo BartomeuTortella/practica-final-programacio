@@ -2,7 +2,6 @@
  * Bartomeu Tortella Garcias i Maria Orell Monserrat
  *
  */
-
 package treballfinalprogii;
 
 import java.awt.Graphics;
@@ -67,6 +66,9 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
 
     public void setSeguirRatoli(boolean seguirRatoli) {
         this.seguirRatoli = seguirRatoli;
+        if (this.seguirRatoli) {
+            this.posicioMouse = new Vector(0, 0);
+        }
     }
 
     public void setNumeroBolles(int numeroBolles) {

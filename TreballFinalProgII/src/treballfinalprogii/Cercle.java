@@ -42,6 +42,8 @@ public class Cercle {
 //acceleracio mouse: sera restar vectorPosMouse - PosBolla ----> normalitzam ---> mult per factor
 //adjudicam a la bolla la seva nova pos--> pos anterior bolla + acceleracio
             this.acceleracioMouse = calcularAcceleracioSegonsMouse(posicioMouse);
+            calcularPosicioAmbMouse();
+
         } else {
             calcularDireccio(teLimits);
         }
@@ -114,9 +116,14 @@ public class Cercle {
 
     private Vector calcularAcceleracioSegonsMouse(Vector posicioMouse) {
         posicioMouse.resta(this.posicio);
-        posicioMouse.getModul();
-        //mult x factor
+        posicioMouse.calcularUnitari();
+        posicioMouse.multiplicacio(new Vector(0.01, 0.01));
         return posicioMouse;
+    }
+
+    private void calcularPosicioAmbMouse() {
+        this.posicio.suma(this.acceleracioMouse);
+        System.out.println(this.posicio);
     }
 
     //Direccio i velocitat amb mouse

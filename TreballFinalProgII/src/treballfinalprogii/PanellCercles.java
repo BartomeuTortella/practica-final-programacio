@@ -40,7 +40,9 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
         while (true) {
             for (int i = 0; i < cercles.length; i++) {
                 //g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
-                cercles[i].moureCercle(this.teLimits, this.seguirRatoli, this.posicioMouse);
+                System.out.println("posicio mouse: " + this.posicioMouse);
+                Vector tmpMouse = this.posicioMouse;
+                cercles[i].moureCercle(this.teLimits, this.seguirRatoli, tmpMouse);
                 //millor si tot lo de pintar els cercles ho feim al a classe cercle i aixi queda aqui més net
             }
             repaint();
@@ -66,7 +68,7 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
 
     public void setSeguirRatoli(boolean seguirRatoli) {
         this.seguirRatoli = seguirRatoli;
-        if (this.seguirRatoli) {
+        if (this.seguirRatoli && this.posicioMouse == null) {
             this.posicioMouse = new Vector(0, 0);
         }
     }

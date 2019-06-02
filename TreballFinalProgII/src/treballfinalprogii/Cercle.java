@@ -36,7 +36,6 @@ public class Cercle {
     }
 
     public void moureCercle(boolean teLimits, boolean seguirRatoli, Vector posicioMouse) {
-        this.posicio.suma(this.velocitat);
         if (seguirRatoli) {
 //agafam un cercle i cridam al metode q ens calcula la seva accleracio provocada pel mouse
 //acceleracio mouse: sera restar vectorPosMouse - PosBolla ----> normalitzam ---> mult per factor
@@ -45,7 +44,9 @@ public class Cercle {
             calcularPosicioAmbMouse();
 
         } else {
+            this.posicio.suma(this.velocitat);
             calcularDireccio(teLimits);
+
         }
     }
 
@@ -115,15 +116,19 @@ public class Cercle {
     }
 
     private Vector calcularAcceleracioSegonsMouse(Vector posicioMouse) {
-        posicioMouse.resta(this.posicio);
-        posicioMouse.calcularUnitari();
-        posicioMouse.multiplicacio(new Vector(0.01, 0.01));
-        return posicioMouse;
+        Vector tmpMouse = posicioMouse;
+        tmpMouse.resta(this.posicio);
+//        System.out.println("resultat resta:" + posicioMouse);
+        tmpMouse.calcularUnitari();
+//        System.out.println("resultat unitari:" + posicioMouse);
+        tmpMouse.multiplicacio(new Vector(10, 10));
+
+        return tmpMouse;
     }
 
     private void calcularPosicioAmbMouse() {
         this.posicio.suma(this.acceleracioMouse);
-        System.out.println(this.posicio);
+//        System.out.println("resultat suma: " + this.posicio);
     }
 
     //Direccio i velocitat amb mouse
@@ -186,6 +191,14 @@ public class Cercle {
 
     public void setAcceleracio(Vector acceleracio) {
         this.acceleracio = acceleracio;
+    }
+
+    public Vector getAcceleracioMouse() {
+        return acceleracioMouse;
+    }
+
+    public void setAcceleracioMouse(Vector acceleracioMouse) {
+        this.acceleracioMouse = acceleracioMouse;
     }
 
 }

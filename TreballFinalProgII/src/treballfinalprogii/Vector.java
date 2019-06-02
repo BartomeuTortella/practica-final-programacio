@@ -36,9 +36,9 @@ public class Vector {
     //Normalitzar vector --> fer-lo unitari. Hem de fer el mòdul (arrel quadrada de sumar elements vector al quadrat); 
     // i dividim cada element pel modul.
     public void calcularUnitari() {
-        this.x = (this.x * this.x);
-        this.y = (this.y * this.y);
-        this.modul = Math.sqrt((this.x + this.y));
+        double tmpX = (this.x * this.x);
+        double tmpY = (this.y * this.y);
+        this.modul = Math.sqrt((tmpX + tmpY));
         this.normalitzacio();
     }
 

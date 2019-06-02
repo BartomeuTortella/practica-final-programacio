@@ -8,34 +8,37 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Vector {
 
+    //definim els atributs de la classe Vector
     private double x;
     private double y;
     private double modul;
 
     public Vector(double x, double y) {
+        //inicialitzam les variables
         this.x = x;
         this.y = y;
     }
 
-    public void suma(Vector v) { //tb ho puc fer com public Vector Suma (Vector v){ i acabar amb un "return this"}
+    public void suma(Vector v) {
+        //sumam el valor del vector que ens pasen per parametre al vector actual
         this.x += v.getX();
         this.y += v.getY();
     }
 
     public void resta(Vector v) {
+        //restam el valor del vector que ens pasen per parametre al vector actual
         this.x -= v.getX();
         this.y -= v.getY();
     }
 
     public void multiplicacio(Vector v) {
+        //multiplicam el valor del vector que ens pasen per parametre al vector actual
         this.x *= v.getX();
         this.y *= v.getY();
     }
 
-    //CANVIAR NOM
-    //Normalitzar vector --> fer-lo unitari. Hem de fer el mòdul (arrel quadrada de sumar elements vector al quadrat); 
-    // i dividim cada element pel modul.
     public void calcularUnitari() {
+        //no se si esta bé per tant no coment 
         double tmpX = (this.x * this.x);
         double tmpY = (this.y * this.y);
         this.modul = Math.sqrt((tmpX + tmpY));
@@ -43,18 +46,25 @@ public class Vector {
     }
 
     private void normalitzacio() {
+        //no se si esta bé per tant no coment 
+
         this.x = this.x / modul;
         this.y = this.y / modul;
     }
 
-    public static Vector generarPosicioAleatoria() { //aixo ha d'estar a la classe vector .
-
-        int randomNumX = ThreadLocalRandom.current().nextInt(0, 460 + 1);
-        int randomNumY = ThreadLocalRandom.current().nextInt(0, 634 + 1);
+    public static Vector generarPosicioAleatoria() {
+        // generam un nombre aleatori entre 0 i el marge de x - 100 
+        int randomNumX = ThreadLocalRandom.current().nextInt(0, PanellCercles.margeX - 100);
+        // generam un nombre aleatori entre 0 i el marge de y - 100 
+        int randomNumY = ThreadLocalRandom.current().nextInt(0, PanellCercles.margeY - 100);
+        //cream un vector amb aquestes posicions aleatories
         Vector vector = new Vector(randomNumX, randomNumY);
+        //retornam el vector
         return vector;
     }
 
+    
+    //getters && setters && toString
     public double getX() {
         return x;
     }

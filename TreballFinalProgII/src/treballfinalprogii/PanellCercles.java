@@ -16,37 +16,46 @@ import javax.swing.JPanel;
  */
 public class PanellCercles extends JPanel implements MouseMotionListener {
 
-    private Cercle[] cercles;
-    private boolean teLimits = false;
-    private boolean seguirRatoli = false;
-    private Vector posicioMouse;
+    public static final int margeX = 800;   //declaració del marge X del panell cercles
+    public static final int margeY = 700;   //declaració del marge Y del panell cercles
+
+    private Cercle[] cercles;   // definim l'array de cercles
+    private boolean teLimits = false;   //definim i iniciam el valor de teLimits
+    private boolean seguirRatoli = false;   //definim i inicial el valor de seguirRatoli
+    private Vector posicioMouse;    //definim el vecotr de la posició del mouse 
 
     public PanellCercles(int numeroBolles) {
-        this.cercles = crearCercles(numeroBolles);
-        this.addMouseMotionListener(this);
+        this.cercles = crearCercles(numeroBolles); // iniciam l'array de cercles cridant al metode crearCercles
+        this.addMouseMotionListener(this);  //afegim el mouse listener 
     }
 
     private Cercle[] crearCercles(int numCercles) {
+        //metode que ens serveix per crear un array de cercles en posicions aleatories 
+        //iniciam l'array de cercles segons el numero de cercles que ens han passat per parametres
         Cercle[] cercles = new Cercle[numCercles];
+        //recorrem l'array de cercles
         for (int i = 0; i < numCercles; i++) {
+            //posam un cercle a cada posició de l'array a una posició aletoria del panell de cercles
             cercles[i] = new Cercle(Vector.generarPosicioAleatoria());
         }
+        //retornam el cercle
         return cercles;
     }
 
     public void comencarJoc() {
-
-        //al main de la classe main he de cridar akest metode perque tot se posi enmarxa (amb el while true)
+        // while que fa correr el joc sempre
         while (true) {
+            //recorrem l'array de cercles
             for (int i = 0; i < cercles.length; i++) {
-                //g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
-                System.out.println("posicio mouse: " + this.posicioMouse);
                 Vector tmpMouse = this.posicioMouse;
+                //calculam la nova prosició del cercle
                 cercles[i].moureCercle(this.teLimits, this.seguirRatoli, tmpMouse);
                 //millor si tot lo de pintar els cercles ho feim al a classe cercle i aixi queda aqui més net
             }
+            //repintam
             repaint();
             try {
+                //feim que java esperi
                 Thread.sleep(1000 / 30);  // milliseconds
             } catch (InterruptedException ex) {
                 System.out.println(ex);
@@ -67,6 +76,7 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
     }
 
     public void setSeguirRatoli(boolean seguirRatoli) {
+        //falta comentar
         this.seguirRatoli = seguirRatoli;
         if (this.seguirRatoli && this.posicioMouse == null) {
             this.posicioMouse = new Vector(0, 0);
@@ -80,13 +90,14 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        // Draw the box
+        // posam color a la caixa
         g.setColor(java.awt.Color.LIGHT_GRAY);
-        g.fillRect(0, 0, Panell.margeXPanellCercles, Panell.margeYPanellCercles);
-        // Draw the ball
+
+        //definim la caixa amb les seves mides i la pintam
+        g.fillRect(0, 0, this.margeX, this.margeY);
+        // recorrem tots els cercles
         for (int i = 0; i < cercles.length; i++) {
-            //g.fillOval(cercle.getPosicio().getX(), cercle.getPosicio().getY(), cercle.getDiamtre(), cercle.getDiamtre());
-            //millor si tot lo de pintar els cercles ho feim al a classe cercle i aixi queda aqui més net
+            // cridam al metode pintar cercle de cada cercle
             cercles[i].pintarCercle(g);
         }
     }
@@ -100,6 +111,7 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
     public void mouseMoved(MouseEvent e) {
         //nomes fer-ho en cas de que el checkbox estigui activat
         if (this.seguirRatoli) {
+            //agafam la posició actual del ratolí
             this.posicioMouse = new Vector(e.getPoint().x, e.getPoint().y);
         }
 

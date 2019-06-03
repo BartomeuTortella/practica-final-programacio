@@ -15,8 +15,8 @@ import javax.swing.JTextField;
 
 public class Panell extends JFrame implements ActionListener {
 
-    public static final int margeXFinestra = 1000; // constant per saber on és el marge X del JFrame
-    public static final int margeYFinestra = 700;  // constant per saber on és el marge Y del JFrame
+    public static final int MARGE_X_FINESTRA = 1000; // constant per saber on és el marge X del JFrame
+    public static final int MARGE_Y_FINESTRA = 700;  // constant per saber on és el marge Y del JFrame
 
     private JLabel textNumBolles;           //text per indicar el titol de numero de bolles
     private JLabel textWithWalls;           //text per indicar el titol de posar o no parets
@@ -27,7 +27,7 @@ public class Panell extends JFrame implements ActionListener {
 
     private PanellCercles panellCercles;    //definim el PanellCercles 
 
-    private int numeroBolles = 2;           //variable que controla el numero de bolles en joc
+    private int numeroBolles = 5;           //variable que controla el numero de bolles en joc
 
     public Panell() {
         super();                    // cridada al constructor del JFrame
@@ -44,50 +44,50 @@ public class Panell extends JFrame implements ActionListener {
 
     private void configurarFinestra() {
         this.setTitle("Bolles");                                // posam el titol a la finestra
-        this.setSize(margeXFinestra, margeYFinestra);           //  posam els marges de la finestra
+        this.setSize(MARGE_X_FINESTRA, MARGE_Y_FINESTRA);           //  posam els marges de la finestra
         this.setLocationRelativeTo(null);                       // posam la finestra al centre de la pantalla
         this.setLayout(null);                                   // no posam un layout ja que així podem donar posicions als components
         this.setResizable(false);                               // feim que la finsestra no es pugui ridimensionar
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    // feim que un cop es tanqui la finestra l'execució s'aturi 
-        this.getContentPane().setBackground(Color.GRAY);        // posam el color de fons
+        this.getContentPane().setBackground(Color.LIGHT_GRAY);        // posam el color de fons
     }
 
     private void inicializarComponentes() {
         this.getContentPane().add(panellCercles); // afegim el panellCercles a la finestra
-        this.panellCercles.setBounds(0, 0, PanellCercles.margeX, PanellCercles.margeY); //el col·locam a la posició que volem
+        this.panellCercles.setBounds(0, 0, PanellCercles.MARGE_X_PANELL, PanellCercles.MARGE_Y_PANELL); //el col·locam a la posició que volem
 
         this.caixaNumeroBolles = new JTextField(); // inicialitzam la caixa del numero de bolles
-        this.caixaNumeroBolles.setBounds(PanellCercles.margeX + 50, 150, 100, 25); //el col·locam a la posició que volem 
+        this.caixaNumeroBolles.setBounds(PanellCercles.MARGE_X_PANELL + 50, 150, 100, 25); //el col·locam a la posició que volem 
         this.caixaNumeroBolles.setText(Integer.toString(this.numeroBolles)); //posam el text per defecte el numero de bolles inicials
         this.getContentPane().add(this.caixaNumeroBolles);  //afegim la caixa a la finestra 
         this.caixaNumeroBolles.addActionListener(this);     //afegim l'action listener
 
         this.activarLimits = new JCheckBox(); // inicialitzam el checkbox
-        this.activarLimits.setBounds(PanellCercles.margeX + 20, 200, 25, 25); //el col·locam a la posició que volem
+        this.activarLimits.setBounds(PanellCercles.MARGE_X_PANELL + 20, 200, 25, 25); //el col·locam a la posició que volem
         this.getContentPane().add(this.activarLimits);  //afegim el checkbox a la finestra 
         this.activarLimits.addActionListener(this); //afegim l'action listener
 
         this.activarRatoli = new JCheckBox(); // inicialitzam el checkbox
-        this.activarRatoli.setBounds(PanellCercles.margeX + 20, 250, 25, 25); //el col·locam a la posició que volem
+        this.activarRatoli.setBounds(PanellCercles.MARGE_X_PANELL + 20, 250, 25, 25); //el col·locam a la posició que volem
         this.getContentPane().add(this.activarRatoli); //afegim el checkbox a la finestra 
         this.activarRatoli.addActionListener(this); //afegim l'action listener
 
         this.textNumBolles = new JLabel(); // inicialitzam el titol 
         this.textNumBolles.setText("# Balls:");  // posam el text del titol
         this.textNumBolles.setFont(new Font("Serif", Font.BOLD, 28)); //posam l'estil de la font 
-        this.textNumBolles.setBounds(PanellCercles.margeX + 50, 100, 150, 30); //el col·locam a la posició que volem
+        this.textNumBolles.setBounds(PanellCercles.MARGE_X_PANELL + 50, 100, 150, 30); //el col·locam a la posició que volem
         this.textNumBolles.setLayout(null);
         this.getContentPane().add(this.textNumBolles); // ho afegim a la finestra
 
         this.textWithWalls = new JLabel(); // inicialitzam el titol 
         this.textWithWalls.setText("With walls"); // posam el text del titol
-        this.textWithWalls.setBounds(PanellCercles.margeX + 50, 200, 100, 25); //el col·locam a la posició que volem
+        this.textWithWalls.setBounds(PanellCercles.MARGE_X_PANELL + 50, 200, 100, 25); //el col·locam a la posició que volem
         this.textWithWalls.setLayout(null);
         this.getContentPane().add(this.textWithWalls); // ho afegim a la finestra
 
         this.textFollowMouse = new JLabel(); // inicialitzam el titol 
         this.textFollowMouse.setText("Follow mouse"); // posam el text del titol
-        this.textFollowMouse.setBounds(PanellCercles.margeX + 50, 250, 100, 25); //el col·locam a la posició que volem
+        this.textFollowMouse.setBounds(PanellCercles.MARGE_X_PANELL + 50, 250, 100, 25); //el col·locam a la posició que volem
         this.textFollowMouse.setLayout(null);
         this.getContentPane().add(this.textFollowMouse); // ho afegim a la finestra
 

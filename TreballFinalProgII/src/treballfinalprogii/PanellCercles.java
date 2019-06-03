@@ -16,8 +16,8 @@ import javax.swing.JPanel;
  */
 public class PanellCercles extends JPanel implements MouseMotionListener {
 
-    public static final int margeX = 800;   //declaració del marge X del panell cercles
-    public static final int margeY = 700;   //declaració del marge Y del panell cercles
+    public static final int MARGE_X_PANELL = 800;   //declaració del marge X del panell cercles
+    public static final int MARGE_Y_PANELL = 700;   //declaració del marge Y del panell cercles
 
     private Cercle[] cercles;   // definim l'array de cercles
     private boolean teLimits = false;   //definim i iniciam el valor de teLimits
@@ -47,18 +47,23 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
         while (true) {
             //recorrem l'array de cercles
             for (int i = 0; i < cercles.length; i++) {
-                //calculam la nova prosició del cercle
-
+                // comprovam que seguir ratoli estigui activat
                 if (this.seguirRatoli) {
+                    //revisam si els limits del panell estan activats
                     if (this.teLimits) {
+                        // si té limits cridam a calcularDirreccióRebot amb un parametre de posició mouse
                         cercles[i].calcularDireccioRebot(this.posicioMouse);
                     } else {
+                        // si no té limits cridam a calcularDireccioContinu amb un parametre de posició mouse
                         cercles[i].calcularDireccioContinu(this.posicioMouse);
                     }
                 } else {
+                    //revisam si els limits del panell estan activats
                     if (this.teLimits) {
+                        // si té limits cridam a calcularDirreccióRebot
                         cercles[i].calcularDireccioRebot();
                     } else {
+                        // si no té limits cridam a calcularDireccioContinu 
                         cercles[i].calcularDireccioContinu();
                     }
                 }
@@ -100,10 +105,10 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         // posam color a la caixa
-        g.setColor(java.awt.Color.LIGHT_GRAY);
+        g.setColor(java.awt.Color.WHITE);
 
         //definim la caixa amb les seves mides i la pintam
-        g.fillRect(0, 0, this.margeX, this.margeY);
+        g.fillRect(0, 0, this.MARGE_X_PANELL, this.MARGE_Y_PANELL);
         // recorrem tots els cercles
         for (int i = 0; i < cercles.length; i++) {
             // cridam al metode pintar cercle de cada cercle

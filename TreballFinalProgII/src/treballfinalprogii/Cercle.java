@@ -36,19 +36,25 @@ public class Cercle {
         this.posicio = posicio;
         //definim una velocitat inicial
         this.velocitat = new Vector(0, 1);
+        //definim una velocitat mouse inicial
         this.velocitatMouse = new Vector(0, 0);
         //definim una acceleració inicial
         this.acceleracio = new Vector(0, 0.1);
     }
 
     private void calcularAcceleracioIPosicioMouse(Vector posicioMouse) {
+        // calculam l'acceleracio Segons la posició del Mouse
         this.acceleracioMouse = calcularAcceleracioSegonsMouse(posicioMouse);
+        //cridam a comprovar velocitat limit mouse 
         comprovarVelocitatLimitMouse();
     }
 
     private void comprovarVelocitatLimitMouse() {
+        //sumam l'acceleració a la velocitat del mouse
         this.velocitatMouse.suma(this.acceleracioMouse);
+        //revisam que la velocitat no superi el límit de velocitat
         this.velocitatMouse = Vector.limit(this.velocitatMouse, this.velocitatLimitMouse);
+        //sumam la velocitat a la posició
         this.posicio.suma(velocitatMouse);
     }
 
@@ -74,12 +80,12 @@ public class Cercle {
         //cirdam a comprovar velocitat limit
         comprovarVelocitatLimit();
         //revisam si hem topat amb la paret esquerra o dreta de l'eix X
-        if (this.posicio.getX() < 0 || this.posicio.getX() > (PanellCercles.margeX - this.diamtre)) {
+        if (this.posicio.getX() < 0 || this.posicio.getX() > (PanellCercles.MARGE_X_PANELL - this.diamtre)) {
             // si es així invertim el signe de la velocitat
             this.velocitat.setX(-this.getVelocitat().getX());
         }
         // revisam si hem topat amb la paret d'adalt o d'abaix de l'eix Y
-        if (this.posicio.getY() < 0 || this.posicio.getY() > (PanellCercles.margeY - 60)) {
+        if (this.posicio.getY() < 0 || this.posicio.getY() > (PanellCercles.MARGE_Y_PANELL - 60)) {
             // si es així invertim el signe de la velocitat
             this.velocitat.setY(-this.velocitat.getY());
         }
@@ -93,18 +99,18 @@ public class Cercle {
         //comprovam si hem passat la paret de l'esquerra en l'eix X
         if (this.posicio.getX() < 0 - 100) {
             //  si es aixi passam la pilota a l'altre banda 
-            this.posicio.setX(PanellCercles.margeX);
+            this.posicio.setX(PanellCercles.MARGE_X_PANELL);
             //comprovam si hem passat la paret de la dreta en l'eix X
-        } else if (this.posicio.getX() > PanellCercles.margeX + 120) {
+        } else if (this.posicio.getX() > PanellCercles.MARGE_X_PANELL + 120) {
             //  si es aixi passam la pilota a l'altre banda 
             this.posicio.setX(0);
         }
         //comprovam si hem passat la paret de dalt en l'eix Y
         if (this.posicio.getY() < 0 - 100) {
             //  si es aixi passam la pilota a l'altre banda 
-            this.posicio.setY(PanellCercles.margeY);
+            this.posicio.setY(PanellCercles.MARGE_Y_PANELL);
             //comprovam si hem passat la paret d'abaix en l'eix Y
-        } else if (this.posicio.getY() > PanellCercles.margeY) {
+        } else if (this.posicio.getY() > PanellCercles.MARGE_Y_PANELL) {
             //  si es aixi passam la pilota a l'altre banda 
             this.posicio.setY(-4);
         }
@@ -112,41 +118,42 @@ public class Cercle {
     }
 
     public void calcularDireccioRebot(Vector posicioMouse) {
+        //calculam l'acceleració i la posció segons la posició dels mouse 
         calcularAcceleracioIPosicioMouse(posicioMouse);
 
-        //cirdam a comprovar velocitat limit
         //revisam si hem topat amb la paret esquerra o dreta de l'eix X
-        if (this.posicio.getX() < 0  || this.posicio.getX() > (PanellCercles.margeX - this.diamtre)) {
+        if (this.posicio.getX() < 0 || this.posicio.getX() > (PanellCercles.MARGE_X_PANELL - this.diamtre)) {
             // si es així invertim el signe de la velocitat
             this.velocitatMouse.setX(-this.velocitatMouse.getX());
-           
+
         }
         // revisam si hem topat amb la paret d'adalt o d'abaix de l'eix Y
-        if (this.posicio.getY() < 0 || this.posicio.getY() > (PanellCercles.margeY - (this.diamtre + 20))) {
+        if (this.posicio.getY() < 0 || this.posicio.getY() > (PanellCercles.MARGE_Y_PANELL - (this.diamtre + 20))) {
             // si es així invertim el signe de la velocitat
             this.velocitatMouse.setY(-this.velocitatMouse.getY());
         }
     }
 
     public void calcularDireccioContinu(Vector posicioMouse) {
+        //calculam l'acceleració i la posció segons la posició dels mouse 
         calcularAcceleracioIPosicioMouse(posicioMouse);
 
         //cirdam a comprovar velocitat limit
         //comprovam si hem passat la paret de l'esquerra en l'eix X
         if (this.posicio.getX() < 0) {
             //  si es aixi passam la pilota a l'altre banda 
-            this.posicio.setX(PanellCercles.margeX);
+            this.posicio.setX(PanellCercles.MARGE_X_PANELL);
             //comprovam si hem passat la paret de la dreta en l'eix X
-        } else if (this.posicio.getX() > PanellCercles.margeX) {
+        } else if (this.posicio.getX() > PanellCercles.MARGE_X_PANELL) {
             //  si es aixi passam la pilota a l'altre banda 
             this.posicio.setX(0);
         }
         //comprovam si hem passat la paret de dalt en l'eix Y
         if (this.posicio.getY() < 0) {
             //  si es aixi passam la pilota a l'altre banda 
-            this.posicio.setY(PanellCercles.margeY);
+            this.posicio.setY(PanellCercles.MARGE_Y_PANELL);
             //comprovam si hem passat la paret d'abaix en l'eix Y
-        } else if (this.posicio.getY() > PanellCercles.margeY) {
+        } else if (this.posicio.getY() > PanellCercles.MARGE_Y_PANELL) {
             //  si es aixi passam la pilota a l'altre banda 
             this.posicio.setY(0);
         }
@@ -170,8 +177,6 @@ public class Cercle {
         tmpMouse.multiplicacio(this.factorMouse);
         return tmpMouse;
     }
-
-   
 
     //Direccio i velocitat amb mouse
     public void pintarCercle(Graphics g) {

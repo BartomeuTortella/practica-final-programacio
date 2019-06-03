@@ -21,9 +21,12 @@ public class Cercle {
     private Vector posicio;
     private Vector velocitat;
     private Vector acceleracio;
+    private Vector velocitatMouse;
     private Vector acceleracioMouse;
     private Ellipse2D.Float cercle;
     private final int velocitatLimit = 10;
+    private final int velocitatLimitMouse = 10;
+    private final double factorMouse = 0.7;
 
     public Cercle(Vector posicio) {
 
@@ -33,34 +36,20 @@ public class Cercle {
         this.posicio = posicio;
         //definim una velocitat inicial
         this.velocitat = new Vector(0, 1);
+        this.velocitatMouse = new Vector(0, 0);
         //definim una acceleració inicial
-        this.acceleracio = new Vector(-0.01, 0.1);
+        this.acceleracio = new Vector(0, 0.1);
     }
 
-    public void moureCercle(boolean teLimits, boolean seguirRatoli, Vector posicioMouse) {
-        if (seguirRatoli) {
-            //agafam un cercle i cridam al metode q ens calcula la seva accleracio provocada pel mouse
-            //acceleracio mouse: sera restar vectorPosMouse - PosBolla ----> normalitzam ---> mult per factor
-            //adjudicam a la bolla la seva nova pos--> pos anterior bolla + acceleracio
-            this.acceleracioMouse = calcularAcceleracioSegonsMouse(posicioMouse);
-            calcularPosicioAmbMouse();
-
-        } else {
-            //sumam la velociatat a la posicio
-            this.posicio.suma(this.velocitat);
-            //cridam calcular direcció i passam per parametres si te limits o no
-            calcularDireccio(teLimits);
-
-        }
+    private void calcularAcceleracioIPosicioMouse(Vector posicioMouse) {
+        this.acceleracioMouse = calcularAcceleracioSegonsMouse(posicioMouse);
+        comprovarVelocitatLimitMouse();
     }
 
-    private void calcularDireccio(boolean teLimits) {
-        //miram si té limits 
-        if (teLimits) {
-            this.calcularDireccioRebot();
-        } else {
-            this.calcularDireccioContinu();
-        }
+    private void comprovarVelocitatLimitMouse() {
+        this.velocitatMouse.suma(this.acceleracioMouse);
+        this.velocitatMouse = Vector.limit(this.velocitatMouse, this.velocitatLimitMouse);
+        this.posicio.suma(velocitatMouse);
     }
 
     private void comprovarVelocitatLimit() {
@@ -79,7 +68,9 @@ public class Cercle {
         }
     }
 
-    private void calcularDireccioRebot() {
+    public void calcularDireccioRebot() {
+        this.posicio.suma(this.velocitat);
+
         //cirdam a comprovar velocitat limit
         comprovarVelocitatLimit();
         //revisam si hem topat amb la paret esquerra o dreta de l'eix X
@@ -94,7 +85,9 @@ public class Cercle {
         }
     }
 
-    private void calcularDireccioContinu() {
+    public void calcularDireccioContinu() {
+        this.posicio.suma(this.velocitat);
+
         //cirdam a comprovar velocitat limit
         comprovarVelocitatLimit();
         //comprovam si hem passat la paret de l'esquerra en l'eix X
@@ -118,6 +111,48 @@ public class Cercle {
 
     }
 
+    public void calcularDireccioRebot(Vector posicioMouse) {
+        calcularAcceleracioIPosicioMouse(posicioMouse);
+
+        //cirdam a comprovar velocitat limit
+        //revisam si hem topat amb la paret esquerra o dreta de l'eix X
+        if (this.posicio.getX() < 0  || this.posicio.getX() > (PanellCercles.margeX - this.diamtre)) {
+            // si es així invertim el signe de la velocitat
+            this.velocitatMouse.setX(-this.velocitatMouse.getX());
+           
+        }
+        // revisam si hem topat amb la paret d'adalt o d'abaix de l'eix Y
+        if (this.posicio.getY() < 0 || this.posicio.getY() > (PanellCercles.margeY - (this.diamtre + 20))) {
+            // si es així invertim el signe de la velocitat
+            this.velocitatMouse.setY(-this.velocitatMouse.getY());
+        }
+    }
+
+    public void calcularDireccioContinu(Vector posicioMouse) {
+        calcularAcceleracioIPosicioMouse(posicioMouse);
+
+        //cirdam a comprovar velocitat limit
+        //comprovam si hem passat la paret de l'esquerra en l'eix X
+        if (this.posicio.getX() < 0) {
+            //  si es aixi passam la pilota a l'altre banda 
+            this.posicio.setX(PanellCercles.margeX);
+            //comprovam si hem passat la paret de la dreta en l'eix X
+        } else if (this.posicio.getX() > PanellCercles.margeX) {
+            //  si es aixi passam la pilota a l'altre banda 
+            this.posicio.setX(0);
+        }
+        //comprovam si hem passat la paret de dalt en l'eix Y
+        if (this.posicio.getY() < 0) {
+            //  si es aixi passam la pilota a l'altre banda 
+            this.posicio.setY(PanellCercles.margeY);
+            //comprovam si hem passat la paret d'abaix en l'eix Y
+        } else if (this.posicio.getY() > PanellCercles.margeY) {
+            //  si es aixi passam la pilota a l'altre banda 
+            this.posicio.setY(0);
+        }
+
+    }
+
     private Vector calcularVelocitat() {
         //crema un vector temporal de velocitat
         Vector velocitatTemp = new Vector(0, 0);
@@ -131,18 +166,12 @@ public class Cercle {
     private Vector calcularAcceleracioSegonsMouse(Vector posicioMouse) {
         Vector tmpMouse = new Vector(posicioMouse.getX(), posicioMouse.getY());
         tmpMouse.resta(this.posicio);
-//        System.out.println("resultat resta:" + posicioMouse);
         tmpMouse.calcularUnitari();
-//        System.out.println("resultat unitari:" + posicioMouse);
-        tmpMouse.multiplicacio(new Vector(10, 10));
-
+        tmpMouse.multiplicacio(this.factorMouse);
         return tmpMouse;
     }
 
-    private void calcularPosicioAmbMouse() {
-        this.posicio.suma(this.acceleracioMouse);
-//        System.out.println("resultat suma: " + this.posicio);
-    }
+   
 
     //Direccio i velocitat amb mouse
     public void pintarCercle(Graphics g) {

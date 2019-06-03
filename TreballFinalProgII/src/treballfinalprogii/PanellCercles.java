@@ -49,11 +49,19 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
             for (int i = 0; i < cercles.length; i++) {
                 //calculam la nova prosició del cercle
 
-                //posar la condició
-                System.out.println(posicioMouse);
-
-                cercles[i].moureCercle(this.teLimits, this.seguirRatoli, this.posicioMouse);
-                //millor si tot lo de pintar els cercles ho feim al a classe cercle i aixi queda aqui més net
+                if (this.seguirRatoli) {
+                    if (this.teLimits) {
+                        cercles[i].calcularDireccioRebot(this.posicioMouse);
+                    } else {
+                        cercles[i].calcularDireccioContinu(this.posicioMouse);
+                    }
+                } else {
+                    if (this.teLimits) {
+                        cercles[i].calcularDireccioRebot();
+                    } else {
+                        cercles[i].calcularDireccioContinu();
+                    }
+                }
             }
             //repintam
             repaint();
@@ -81,9 +89,7 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
     public void setSeguirRatoli(boolean seguirRatoli) {
         //falta comentar
         this.seguirRatoli = seguirRatoli;
-//        if (this.seguirRatoli && this.posicioMouse == null) {
-//            this.posicioMouse = new Vector(0, 0);
-//        }
+
     }
 
     public void setNumeroBolles(int numeroBolles) {
@@ -112,12 +118,8 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        //nomes fer-ho en cas de que el checkbox estigui activat
-        //if (this.seguirRatoli) {
         //agafam la posició actual del ratolí
         this.posicioMouse = new Vector(e.getX(), e.getY());
-        //}
-
     }
 
 }

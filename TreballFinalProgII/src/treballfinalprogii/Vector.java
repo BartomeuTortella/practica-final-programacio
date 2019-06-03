@@ -31,10 +31,10 @@ public class Vector {
         this.y -= v.getY();
     }
 
-    public void multiplicacio(Vector v) {
+    public void multiplicacio(double escalar) {
         //multiplicam el valor del vector que ens pasen per parametre al vector actual
-        this.x *= v.getX();
-        this.y *= v.getY();
+        this.x *= escalar;
+        this.y *= escalar;
     }
 
     public void calcularUnitari() {
@@ -49,6 +49,22 @@ public class Vector {
         //no se si esta bé per tant no coment 
         this.x = this.x / modul;
         this.y = this.y / modul;
+    }
+
+    private static double getMagnitud(Vector v) {
+        double tmpX = (v.x * v.x);
+        double tmpY = (v.y * v.y);
+        double modul = Math.sqrt((tmpX + tmpY));
+        return modul;
+    }
+
+    public static Vector limit(Vector v, double limit) {
+        double magnitud = getMagnitud(v);
+        if (magnitud > limit) {
+            v.calcularUnitari();
+            v.multiplicacio(limit);
+        }
+        return v;
     }
 
     public static Vector generarPosicioAleatoria() {

@@ -129,7 +129,7 @@ public class Cercle {
     }
 
     private Vector calcularAcceleracioSegonsMouse(Vector posicioMouse) {
-        Vector tmpMouse = posicioMouse;
+        Vector tmpMouse = new Vector(posicioMouse.getX(), posicioMouse.getY());
         tmpMouse.resta(this.posicio);
 //        System.out.println("resultat resta:" + posicioMouse);
         tmpMouse.calcularUnitari();

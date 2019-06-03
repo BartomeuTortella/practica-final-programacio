@@ -47,7 +47,6 @@ public class Vector {
 
     private void normalitzacio() {
         //no se si esta bé per tant no coment 
-
         this.x = this.x / modul;
         this.y = this.y / modul;
     }
@@ -63,7 +62,6 @@ public class Vector {
         return vector;
     }
 
-    
     //getters && setters && toString
     public double getX() {
         return x;

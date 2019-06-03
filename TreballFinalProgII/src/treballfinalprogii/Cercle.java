@@ -9,10 +9,7 @@ import java.awt.Graphics;
 import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
-/**
- *
- * @author mery
- */
+
 public class Cercle {
 
     //declaració dels atributs de la classe Cercle

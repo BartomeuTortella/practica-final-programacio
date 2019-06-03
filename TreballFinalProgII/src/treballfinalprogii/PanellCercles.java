@@ -10,10 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 
-/**
- *
- * @author mery
- */
 public class PanellCercles extends JPanel implements MouseMotionListener {
 
     public static final int MARGE_X_PANELL = 800;   //declaració del marge X del panell cercles
@@ -80,6 +76,7 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
         }
     }
 
+    //getters && setters
     public boolean teLimits() {
         return teLimits;
     }

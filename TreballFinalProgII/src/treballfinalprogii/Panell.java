@@ -43,7 +43,7 @@ public class Panell extends JFrame implements ActionListener {
     }
 
     private void configurarFinestra() {
-        this.setTitle("Bolles");                                // posam el titol a la finestra
+        this.setTitle("Simulació del moviment de les bolles");                                // posam el titol a la finestra
         this.setSize(MARGE_X_FINESTRA, MARGE_Y_FINESTRA);           //  posam els marges de la finestra
         this.setLocationRelativeTo(null);                       // posam la finestra al centre de la pantalla
         this.setLayout(null);                                   // no posam un layout ja que així podem donar posicions als components

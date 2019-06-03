@@ -25,6 +25,7 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
     private Vector posicioMouse;    //definim el vecotr de la posició del mouse 
 
     public PanellCercles(int numeroBolles) {
+        super();
         this.cercles = crearCercles(numeroBolles); // iniciam l'array de cercles cridant al metode crearCercles
         this.addMouseMotionListener(this);  //afegim el mouse listener 
     }
@@ -34,7 +35,7 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
         //iniciam l'array de cercles segons el numero de cercles que ens han passat per parametres
         Cercle[] cercles = new Cercle[numCercles];
         //recorrem l'array de cercles
-        for (int i = 0; i < numCercles; i++) {
+        for (int i = 0; i < cercles.length; i++) {
             //posam un cercle a cada posició de l'array a una posició aletoria del panell de cercles
             cercles[i] = new Cercle(Vector.generarPosicioAleatoria());
         }
@@ -92,7 +93,6 @@ public class PanellCercles extends JPanel implements MouseMotionListener {
     }
 
     public void setSeguirRatoli(boolean seguirRatoli) {
-        //falta comentar
         this.seguirRatoli = seguirRatoli;
 
     }
